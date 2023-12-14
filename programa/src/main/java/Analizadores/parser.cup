@@ -1,0 +1,31 @@
+import java_cup.runtime.*;
+
+action code {:
+
+public void hola() {
+    System.out.println("Hola");
+}
+
+public void adios() {
+    System.out.println("Adios");
+}
+
+:}
+
+
+// Crea el parser y lo conecta al scanner (JFlex con expresiones regulares)
+parser code {:
+    lexer lex;
+
+    public parser(lexer lex) {
+        this.lex=lex;
+        this.symbolFactory = new DefaultSymbolFactory();
+    }
+
+:}
+
+// Escanear los tokens
+scan with {: return lex.next_token(); :};
+init with {: :}
+
+// Definicion de termminales (Tokens)
