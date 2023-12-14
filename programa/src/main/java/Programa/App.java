@@ -11,6 +11,7 @@ package Programa;
 public class App {
     
     public static void main(String[] args) {
+        // Aqui van las funciones para correr el programa principal
         System.out.println("Hola mundo");
     }
    
