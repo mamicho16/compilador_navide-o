@@ -1,27 +1,59 @@
-    /* JFlex example: partial Java language lexer specification */
-    import java_cup.runtime.*;
+import java_cup.runtime.*;
 
-    /**
-     * This class is a simple example lexer.
-     */
-    %%
 
-    %class Lexer
-    %unicode
-    %cup
-    %line
-    %column
+%class Lexer
+%unicode
+%cup
+%line
+%column
 
-    %{
-      StringBuffer string = new StringBuffer();
+%{
+    StringBuffer string = new StringBuffer();
 
-      private Symbol symbol(int type) {
+    private Symbol symbol(int type) {
         return new Symbol(type, yyline, yycolumn);
-      }
-      private Symbol symbol(int type, Object value) {
+    }
+
+    private Symbol symbol(int type, Object value) {
         return new Symbol(type, yyline, yycolumn, value);
-      }
-    %}
+    }
+%}
+    
+// Expresiones Regulares
+
+// Operadores aritmeticos binarios
+SUMA = \+
+RESTA = -
+DIVISION = \/
+MULTIPLICACION = \*
+MODULO = \~
+POTENCIA = \**
+
+// Operadores arimeticos unarios
+SUMASUMA = \+\+
+RESTARESTA = --
+
+// Operadores relacionales
+MENOR = <
+MENORIGUAL = <=
+MAYOR = >
+MAYORIGUAL = >=
+IGUAL = ==
+DIFERENTE = !=
+
+// Operadores logicos
+
+AND = \^
+OR = #
+NOT = !
+
+// Identificador
+
+IDENTIFICADOR = [:jletter:] [:jletterdigit:]*
+
+// 
+    
+    
 
     LineTerminator = \r|\n|\r\n
     InputCharacter = [^\r\n]
