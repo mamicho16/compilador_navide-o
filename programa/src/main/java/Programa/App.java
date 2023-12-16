@@ -4,6 +4,13 @@
  */
 package Programa;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java_cup.runtime.Symbol;
+
 /**
  *
  * @author anon
@@ -11,8 +18,54 @@ package Programa;
 public class App {
     
     public static void main(String[] args) {
-        // Aqui van las funciones para correr el programa principal
-        System.out.println("Hola mundo");
+        // Rutas de los archivos a leer y crear
+        String fileName = "src/main/java/Programa/test.txt";
+        String outputFile = "src/main/java/Programa/resultados.html";
+    
+        System.out.println("Leyendo archivo: " + fileName);
+        
+        // Variable para almacenar los resultados de los tokens
+        ArrayList<String[]> results = new ArrayList<>();
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            Lexer lex = new Lexer(reader);
+            
+            int i = 0;
+            Symbol token;
+            
+            while (true) {
+                token = lex.next_token();
+                // Si el token simbolo es diferente a 0 (aun no ha terminado de leer) y si es invalido
+                if (token.sym != 0 && token.sym == sym.err_malcriado) {
+                    System.err.println("En la linea " + token.left + ", columna " + token.right + " el token: " + token.value + " es invalido.");
+                // Si no ha terminado de leer crea las filas para la tabla
+                } else if (token.sym != 0) {
+                    String[] row = new String[5];
+                    row[0] = sym.terminalNames[token.sym];
+                    row[1] = token.value.toString();
+                    row[2] = Integer.toString(token.sym);
+                    row[3] = Integer.toString(token.left);
+                    row[4] = Integer.toString(token.right);
+                    results.add(row);
+                // Se termina de leer y muestra en consola los lexemas encontrados
+                } else {
+                    System.out.println("Cantidad de lexemas encontrados: " +i);
+                    return;
+                }
+                i++;
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        // Instancia la clase para crear la tabla HTML
+        HTMLTable tableGenerator = new HTMLTable();
+        // Crea la tabla con los resultos
+        String table = tableGenerator.createTable(results);
+        // Escribe el archivo HTML con los resultados guardados
+        tableGenerator.createHTMLFile(table, outputFile);
+        System.out.println("Tabla HTML con resultados guardada en: " + outputFile);
     }
    
 }
