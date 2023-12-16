@@ -14,7 +14,7 @@ public void hola_mundo() {
 parser code {:
     Lexer lex;
 
-    public parser(Lexer lex) {
+    public Parser(Lexer lex) {
         this.lex=lex;
         this.symbolFactory = new DefaultSymbolFactory();
     }

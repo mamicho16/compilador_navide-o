@@ -1,0 +1,29 @@
+string miNombre <= "Josafat"| @ Soy un comentario
+
+int josafat <= 2 |
+
+@ Verificacion de que no me atrapa una palabra reservada
+@ en medio de una variable
+
+int josaintfat|
+
+do {
+    ++josafat|
+    print(josafat)|
+} until (josafat == 10)
+
+
+float miNumero <= 31 - 3.4 + -40| 
+float miOtroNumero <= 0.4|
+float miOtroOtroNumero <= -0.3|
+float miOtroOtroOtroNumero <= -12.3|
+/_ 
+    Soy un comentario multilinea
+_/
+++josafat|
+josafat <= 1 - -1| 
+
+@ Definición de funciones
+function int suma(int a, int b) {
+    return a + b|
+}

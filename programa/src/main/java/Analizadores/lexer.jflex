@@ -117,7 +117,7 @@ Asignador = \<\=
   {WhiteSpace}                   { /* ignore */ }
 
   /* identifiers */ 
-  {Identifier}                   { return symbol(sym.persona, yytext()); }
+  {Identifier}                   { return symbol(sym.identificador_persona, yytext()); }
   
   /* operators */
   {SUMA}                         { return symbol(sym.suma_rudolph, yytext()); }
