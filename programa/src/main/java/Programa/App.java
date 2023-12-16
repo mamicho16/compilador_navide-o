@@ -61,7 +61,7 @@ public class App {
             e.printStackTrace();
         }
         
-        // Instancia la clase para crear la tabla HTML
+        // Instancia la clase para crear la tabla HTML 
         HTMLTable tableGenerator = new HTMLTable();
         // Crea la tabla con los resultos
         String table = tableGenerator.createTable(results);
