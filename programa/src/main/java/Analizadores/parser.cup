@@ -1,3 +1,4 @@
+package Analizadores;
 import java_cup.runtime.*;
 
 action code {:
@@ -11,9 +12,9 @@ public void hola_mundo() {
 
 // Crea el parser y lo conecta al scanner (JFlex con expresiones regulares)
 parser code {:
-    lexer lex;
+    Lexer lex;
 
-    public parser(lexer lex) {
+    public parser(Lexer lex) {
         this.lex=lex;
         this.symbolFactory = new DefaultSymbolFactory();
     }
@@ -69,7 +70,7 @@ terminal while_repite, switch_gorro, case_estrella, default_navidad, in_envuelto
 terminal print_narra, read_escucha;
 
 // Fin de expresion
-terminal fin_regalo
+terminal fin_regalo;
 
 // Asignar
 terminal asignar_entrega;
