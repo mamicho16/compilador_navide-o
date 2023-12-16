@@ -1,0 +1,93 @@
+import java_cup.runtime.*;
+
+action code {:
+
+public void hola_mundo() {
+    System.out.println("Hola Mundo");
+}
+
+:}
+
+
+// Crea el parser y lo conecta al scanner (JFlex con expresiones regulares)
+parser code {:
+    lexer lex;
+
+    public parser(lexer lex) {
+        this.lex=lex;
+        this.symbolFactory = new DefaultSymbolFactory();
+    }
+
+:}
+
+// Escanear los tokens
+scan with {: return lex.next_token(); :};
+init with {: :}
+
+// Definicion de termminales (Tokens)
+
+// Operadores arimeticos binarios
+terminal suma_rudolph, resta_dasher, division_dancer;
+terminal multiplicacion_prancer, modulo_vixen, potencia_comet;
+
+// Operadores aritmeticos unarios
+terminal aumentar_quien, disminuir_grinch;
+
+// Operadores relacionales
+terminal igual_twinkle, diferente_sparkle, mayor_jingle;
+terminal mayor_igual_blinky, menor_fizz, menor_igual_mistle;
+
+// Expresiones logicas
+terminal and_melchor, or_gaspar, not_baltasar;
+
+// Identificador
+terminal identificador_persona;
+
+// Tipos de datos
+terminal int_noel, float_nicolas, bool_kringle, string_sinterklaas;
+terminal char_pascuero, null_joulupukki, struct_colacho;
+
+// Literales
+terminal l_int_noel, l_float_nicolas, l_bool_kringle;
+terminal l_string_sinterklaas, l_char_pascuero;
+
+// Parentesis redondos
+terminal redondo_abre_cuento, redondo_cierra_cuento;
+
+// Parentesis cuadrados
+terminal cuadrado_abre_empaque, cuadrado_cierra_empaque;
+
+// Llaves
+terminal llave_abre_regalo, llave_cierra_regalo;
+
+// Estructura de control
+terminal if_elfo, elif_hada, else_duende, for_envuelve;
+terminal do_hace, until_revisa, return_envia, break_corta;
+terminal while_repite, switch_gorro, case_estrella, default_navidad, in_envuelto;
+
+// Print y read
+terminal print_narra, read_escucha;
+
+// Fin de expresion
+terminal fin_regalo
+
+// Asignar
+terminal asignar_entrega;
+
+// Separador
+terminal separador_luces;
+
+// Main
+terminal main_fiestas;
+
+// Error
+terminal err_carbon;
+
+// Estructura gramatical con especificacion de CUP
+
+// Regla inicial
+
+non terminal navidad;
+start with navidad;
+
+navidad ::= {: hola_mundo(); :} identificador_persona;
