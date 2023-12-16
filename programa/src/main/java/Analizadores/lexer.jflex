@@ -59,12 +59,12 @@ InputCharacter = [^\r\n]
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
 
-Comment = {CustomSingleLineComment} | {CustomMultiLineComment}
-
+Comment = {CustomMultiLineComment} | {CustomSingleLineComment} | {DocComment}
+CustomMultiLineComment = "/\_" [^\_] ~"\_/" | "/\_" "\_"+ "/"
 CustomSingleLineComment = "@"{InputCharacter}*
-// CustomMultiLineComment = "/_"( [^_] | _ [^/] | / [^_] | _ / | _ _ [^/] | _ [^_])*"_/"
+DocComment = "/\_\_" {Content} "\_"+ "/"
+Content = ([^\_] | \_+ [^/\_])*
 
-CustomMultiLineComment = "s"
 Identifier = [:jletter:] [:jletterdigit:]*
 Numero = 0 | -?[1-9]{DIGITO}*
 FloatLiteral = -? (0 "." {DIGITO}+ | [1-9] {DIGITO}* "." {DIGITO}+)
@@ -85,6 +85,7 @@ Asignador = \<\=
 %%
 
 /* keywords */
+<YYINITIAL> "function"           { return symbol(sym.function_regalo, "function"); }
 <YYINITIAL> "boolean"            { return symbol(sym.bool_kringle, "boolean"); }
 <YYINITIAL> "int"                { return symbol(sym.int_noel, "int"); }
 <YYINITIAL> "float"              { return symbol(sym.float_nicolas, "float"); }
@@ -113,6 +114,7 @@ Asignador = \<\=
 <YYINITIAL> "in"                 { return symbol(sym.in_envuelto, "in"); }
 
 <YYINITIAL> {
+   \" { string.setLength(0); yybegin(STRING); }
   {Comment}                      { /* ignore */ }
   {WhiteSpace}                   { /* ignore */ }
 

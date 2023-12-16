@@ -8,65 +8,66 @@ package Analizadores;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int for_envuelve = 43;
-  public static final int l_string_sinterklaas = 28;
-  public static final int bool_kringle = 22;
-  public static final int null_joulupukki = 25;
-  public static final int l_float_nicolas = 31;
-  public static final int separador_luces = 57;
-  public static final int char_pascuero = 24;
+  public static final int for_envuelve = 44;
+  public static final int l_string_sinterklaas = 29;
+  public static final int bool_kringle = 23;
+  public static final int null_joulupukki = 26;
+  public static final int l_float_nicolas = 32;
+  public static final int separador_luces = 58;
+  public static final int char_pascuero = 25;
   public static final int mayor_igual_blinky = 13;
-  public static final int in_envuelto = 52;
+  public static final int in_envuelto = 53;
   public static final int suma_rudolph = 2;
-  public static final int elif_hada = 41;
+  public static final int elif_hada = 42;
   public static final int igual_twinkle = 10;
-  public static final int string_sinterklaas = 23;
-  public static final int asignar_entrega = 56;
-  public static final int return_envia = 46;
-  public static final int cuadrado_cierra_empaque = 37;
+  public static final int string_sinterklaas = 24;
+  public static final int asignar_entrega = 57;
+  public static final int return_envia = 47;
+  public static final int cuadrado_cierra_empaque = 38;
   public static final int and_melchor = 16;
-  public static final int else_duende = 42;
+  public static final int else_duende = 43;
   public static final int potencia_comet = 7;
-  public static final int void_painatal = 27;
-  public static final int l_true_olentzero = 32;
+  public static final int void_painatal = 28;
+  public static final int l_true_olentzero = 33;
   public static final int disminuir_grinch = 9;
-  public static final int struct_colacho = 26;
+  public static final int struct_colacho = 27;
   public static final int diferente_sparkle = 11;
   public static final int modulo_vixen = 6;
-  public static final int if_elfo = 40;
+  public static final int if_elfo = 41;
   public static final int or_gaspar = 17;
   public static final int identificador_persona = 19;
-  public static final int l_int_noel = 30;
+  public static final int l_int_noel = 31;
   public static final int EOF = 0;
-  public static final int until_revisa = 45;
+  public static final int until_revisa = 46;
   public static final int multiplicacion_prancer = 5;
-  public static final int llave_cierra_regalo = 39;
-  public static final int l_char_pascuero = 29;
+  public static final int llave_cierra_regalo = 40;
+  public static final int l_char_pascuero = 30;
   public static final int error = 1;
-  public static final int print_narra = 53;
-  public static final int llave_abre_regalo = 38;
+  public static final int print_narra = 54;
+  public static final int llave_abre_regalo = 39;
   public static final int menor_igual_mistle = 15;
   public static final int mayor_jingle = 12;
-  public static final int int_noel = 20;
-  public static final int while_repite = 48;
-  public static final int cuadrado_abre_empaque = 36;
+  public static final int int_noel = 21;
+  public static final int while_repite = 49;
+  public static final int cuadrado_abre_empaque = 37;
+  public static final int function_regalo = 20;
   public static final int aumentar_quien = 8;
-  public static final int fin_regalo = 55;
-  public static final int do_hace = 44;
-  public static final int l_false_jesus = 33;
+  public static final int fin_regalo = 56;
+  public static final int do_hace = 45;
+  public static final int l_false_jesus = 34;
   public static final int resta_dasher = 3;
-  public static final int float_nicolas = 21;
-  public static final int redondo_cierra_cuento = 35;
-  public static final int break_corta = 47;
+  public static final int float_nicolas = 22;
+  public static final int redondo_cierra_cuento = 36;
+  public static final int break_corta = 48;
   public static final int division_dancer = 4;
-  public static final int read_escucha = 54;
-  public static final int default_navidad = 51;
-  public static final int case_estrella = 50;
+  public static final int read_escucha = 55;
+  public static final int default_navidad = 52;
+  public static final int case_estrella = 51;
   public static final int not_baltasar = 18;
-  public static final int main_fiestas = 58;
-  public static final int redondo_abre_cuento = 34;
-  public static final int err_malcriado = 59;
-  public static final int switch_gorro = 49;
+  public static final int main_fiestas = 59;
+  public static final int redondo_abre_cuento = 35;
+  public static final int err_malcriado = 60;
+  public static final int switch_gorro = 50;
   public static final int menor_fizz = 14;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -89,6 +90,7 @@ public class sym {
   "or_gaspar",
   "not_baltasar",
   "identificador_persona",
+  "function_regalo",
   "int_noel",
   "float_nicolas",
   "bool_kringle",

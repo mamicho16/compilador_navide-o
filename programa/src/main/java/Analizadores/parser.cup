@@ -44,6 +44,9 @@ terminal and_melchor, or_gaspar, not_baltasar;
 // Identificador
 terminal identificador_persona;
 
+// Function
+terminal function_regalo;
+
 // Tipos de datos
 terminal int_noel, float_nicolas, bool_kringle, string_sinterklaas;
 terminal char_pascuero, null_joulupukki, struct_colacho, void_painatal;
