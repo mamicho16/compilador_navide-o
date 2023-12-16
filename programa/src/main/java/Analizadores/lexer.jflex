@@ -68,6 +68,7 @@ EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
 DocumentationComment = "/**" {CommentContent} "*"+ "/"
 CommentContent       = ( [^*] | \*+ [^/*] )*
 */
+
 \
 Comment = {CustomSingleLineComment} | {CustomMultiLineComment}
 
@@ -93,7 +94,7 @@ Asignador = \<\=
 
 %%
 
-/* keywords */
+/* palabras reservadas */
 <YYINITIAL> "boolean"            { return symbol(sym.bool_kringle); }
 <YYINITIAL> "int"                { return symbol(sym.int_noel); }
 <YYINITIAL> "float"              { return symbol(sym.float_nicolas); }
