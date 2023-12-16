@@ -14,7 +14,7 @@ public class GeneradorLexer {
     
     public static void main(String[] args) 
     {
-        String path="src/Analizadores/lexer.jflex";
+        String path="src/main/java/Analizadores/lexer.jflex";
         generarLexer(path);
     } 
     

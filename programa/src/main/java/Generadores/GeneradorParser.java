@@ -12,13 +12,13 @@ public class GeneradorParser {
     
    public static void main(String[] args)
     {
-        String opciones[] = new String[3]; 
+        String opciones[] = new String[5]; 
         
         //Seleccionamos la opción de dirección de destino
         opciones[0] = "-destdir";
         
         //Le damos la dirección, carpeta donde se va a generar el parser.java & el simbolosxxx.java
-        opciones[1] = "src/Analizadores";
+        opciones[1] = "src/main/java/Analizadores";
        
         //Seleccionamos la opcion de clase parser
         opciones[2] = "-parser";         
@@ -27,7 +27,7 @@ public class GeneradorParser {
         opciones[3] = "Parser"; 
         
         //Le decimos donde se encuentra el archivo .cup 
-        opciones[4] = "src/Analizadores/parser.cup"; 
+        opciones[4] = "src/main/java/Analizadores/parser.cup"; 
         
         try 
         {
