@@ -44,8 +44,7 @@ terminal and_melchor, or_gaspar, not_baltasar;
 // Identificador
 terminal identificador_persona;
 
-// Function
-terminal function_regalo;
+
 
 // Tipos de datos
 terminal int_noel, float_nicolas, bool_kringle, string_sinterklaas;
@@ -91,7 +90,59 @@ terminal err_malcriado;
 
 // Regla inicial
 
+
+// Function
+terminal function_regalo;
+
+// Variable
+terminal local_arbol;
+
+//Simbolo inicial
 non terminal navidad;
+
+/*
+|-----------------------------------|
+|        //no terminales            |
+|-----------------------------------|
+*/
+//Tipos
+non terminal tipos_noel, literales_noel
+tipos_noel ::= int_noel | float_nicolas | bool_kringle | string_sinterklaas terminal int_noel, float_nicolas, bool_kringle, string_sinterklaas | char_pascuero;
+literales_noel ::= l_string_sinterklaas | l_char_pascuero | l_int_noel | l_float_nicolas | l_true_olentzero | l_false_jesus;
+
+//Funciones
+non terminal bolsa_navidena_f
+
+
 start with navidad;
 
 navidad ::= {: hola_mundo(); :} identificador_persona;
+
+tipos_noel ::= int_noel | float_nicolas | bool_kringle | string_sinterklaas terminal int_noel, float_nicolas, bool_kringle, string_sinterklaas | char_pascuero;
+literales_noel ::= l_string_sinterklaas | l_char_pascuero | l_int_noel | l_float_nicolas | l_true_olentzero | l_false_jesus;
+
+expresion_campana::= literales_noel | identificador_persona | //falta texto
+
+logicas_mediasverdes::= expresion_campana and_melchor expresion | // x ^ y
+expresion_campana or_gaspar expresion_campana | // x # y
+expresion_campana not_baltasar expresion_campana; // !x
+
+relacionales_mediasrojas::= expresion_campana igual_twinkle expresion_campana | // x == y
+expresion_campana diferente_sparkle expresion_campana | // x != y
+expresion_campana mayor_jingle expresion_campana | // x > y
+expresion_campana mayor_igual_blinky expresion_campana | // x >= y
+expresion_campana menor_fizz expresion_campana | // x < y
+expresion_campana menor_igual_mistle expresion_campana; // x =< y
+
+aritmeticas_mediasconrenos::= expresion_campana suma_rudolph expresion_campana | // x + y
+expresion_campana resta_dasher expresion_campana | // x - y
+expresion_campana division_dancer expresion_campana | // x / y
+expresion_campana multiplicacion_prancer expresion_campana | // x * y
+expresion_campana modulo_vixen expresion_campana | // x ~ y
+expresion_campana potencia_comet expresion_campana| // x ** y
+aumentar_quien expresion_campana | // ++x
+disminuir_grinch expresion_campana; // --x
+
+asig_galleta::= local_arbol tipos_noel identificador_persona| // local int x
+local_arbol tipos_noel identificador_persona asignar_entrega expresion_campana | // local int x <= 5
+identificador_persona asignar_entrega expresion_campana; // x <= 5

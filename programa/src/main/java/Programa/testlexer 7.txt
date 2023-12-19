@@ -1,0 +1,29 @@
+ @id+56-id*78 ++id
+|{}()<=
+string "%$$&%&\n|<="
+char '!' var2
+bool true false
+int 45 -3434 
+float 0.5 0.00001 -5.67
+null
+arr1 [ 45 var ]
++ - * ** / ~ -var -70
+++ -- --- +++ ++var
+< > == => =< !=
+not ^ # !
+print read write
+@esto es un comentario
+if elif else for do until | break 
+function , ( ) return 
+
+/_ 
+esto es un comentario multilinea
+_/
+@45.
+100
+"hola
+101
+/_
+102
+@45id
+103

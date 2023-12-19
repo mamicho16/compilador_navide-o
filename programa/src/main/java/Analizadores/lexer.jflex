@@ -30,7 +30,7 @@ RESTA = \-
 DIVISION = \/
 MULTIPLICACION = \*
 MODULO = \~
-POTENCIA = \\
+POTENCIA = \*\*
 
 // Operadores arimeticos unarios
 SUMASUMA = \+\+
