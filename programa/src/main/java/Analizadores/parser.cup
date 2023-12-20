@@ -86,10 +86,7 @@ terminal main_fiestas;
 // Error
 terminal err_malcriado;
 
-// Estructura gramatical con especificacion de CUP
-
-// Regla inicial
-
+// Estructura gramatical para tarea 1
 
 // Function
 terminal function_regalo;
@@ -105,25 +102,63 @@ non terminal navidad;
 |        //no terminales            |
 |-----------------------------------|
 */
-//Tipos
-non terminal tipos_noel, literales_noel
+
+// Regla inicial
+
+non terminal navidad;
+
+// Tipos
+non terminal tipos_noel, literales_noel;
 tipos_noel ::= int_noel | float_nicolas | bool_kringle | string_sinterklaas terminal int_noel, float_nicolas, bool_kringle, string_sinterklaas | char_pascuero;
 literales_noel ::= l_string_sinterklaas | l_char_pascuero | l_int_noel | l_float_nicolas | l_true_olentzero | l_false_jesus;
 
-//Funciones
-non terminal bolsa_navidena_f
+// Funciones
+non terminal funcion_bolsanavidena;
 
+// Expresiones arimeticas
+non terminal aritmeticas_regaloprin;
+
+// Expresiones relacionales;
+non terminal relacionales_regalocomprado;
+
+// Expresiones logicas
+non terminal logicas_regalomanual;
+
+// Asignacion
+non terminal asig_galleta;
+
+
+
+
+
+
+
+
+
+// Definiciones para precedencia y asociatividad
+precedece left suma_rudolph, resta_dasher;
+precedence left division_dancer, multiplicacion_prancer;
+precedence left potencia_comet, modulo_vixen;
+precedence left disminuir_grinch, aumentar_quien;
+precedence left igual_twinkle, menor_fizz, mayor_jingle, mayor_igual_blinky;
+precedence left menor_igual_mistle, diferente_sparkle;
+precedence left and_melchor;
+precedence left or_gaspar;
+precedence left not_baltasar;
 
 start with navidad;
 
 navidad ::= {: hola_mundo(); :} identificador_persona;
 
+// Tipos y literales
 tipos_noel ::= int_noel | float_nicolas | bool_kringle | string_sinterklaas terminal int_noel, float_nicolas, bool_kringle, string_sinterklaas | char_pascuero;
 literales_noel ::= l_string_sinterklaas | l_char_pascuero | l_int_noel | l_float_nicolas | l_true_olentzero | l_false_jesus;
 
-expresion_regalo::= literales_noel | identificador_persona | //falta texto
+// Expresion
+expresion_regalo ::= literales_noel | identificador_persona | //falta texto
 
-aritmeticas_regaloprin::= expresion_regalo suma_rudolph expresion_regalo | // x + y
+// Operaciones arimeticas
+aritmeticas_regaloprin ::= expresion_regalo suma_rudolph expresion_regalo | // x + y
 expresion_regalo resta_dasher expresion_regalo | // x - y
 expresion_regalo division_dancer expresion_regalo | // x / y
 expresion_regalo multiplicacion_prancer expresion_regalo | // x * y
@@ -132,17 +167,56 @@ expresion_regalo potencia_comet expresion_regalo| // x ** y
 aumentar_quien expresion_regalo | // ++x
 disminuir_grinch expresion_regalo; // --x
 
-relacionales_regalocomprado::= expresion_regalo igual_twinkle expresion_regalo | // x == y
+// Operaciones relacionales
+relacionales_regalocomprado ::= expresion_regalo igual_twinkle expresion_regalo | // x == y
 expresion_regalo diferente_sparkle expresion_regalo | // x != y
 expresion_regalo mayor_jingle expresion_regalo | // x > y
 expresion_regalo mayor_igual_blinky expresion_regalo | // x >= y
 expresion_regalo menor_fizz expresion_regalo | // x < y
 expresion_regalo menor_igual_mistle expresion_regalo; // x =< y
 
-logicas_regalomanual::= expresion_regalo and_melchor expresion | // x ^ y
+// Operaciones logicas
+logicas_regalomanual ::= expresion_regalo and_melchor expresion_regalo | // x ^ y
 expresion_regalo or_gaspar expresion_regalo | // x # y
-expresion_regalo not_baltasar expresion_regalo; // !x
+not_baltasar expresion_regalo; // !x
 
-asig_galleta::= local_arbol tipos_noel identificador_persona| // local int x
+// Asignacion de variables
+asig_galleta ::= local_arbol tipos_noel identificador_persona | // local int x
 local_arbol tipos_noel identificador_persona asignar_entrega expresion_regalo | // local int x <= 5
 identificador_persona asignar_entrega expresion_regalo; // x <= 5
+
+// Parametros y funciones (leche main, galletas otras)
+parametros_pascua ::= expresion_regalo | expresion_regalo separador_luces parametros_pascua;
+
+definir_funcion_leche ::= tipos_noel function_regalo main_fiestas redondo_abre_cuento redondo_cierra_cuento |
+                          tipos_noel function_regalo main_fiestas redondo_abre_cuento parametros_pascua redondo_cierra_cuento;
+
+defininir_funcion_galletas ::= tipos_noel function_regalo identificador_persona redondo_abre_cuento redondo_cierra_cuento |
+                               tipos_noel function_regalo identificador_persona redondo_abre_cuento parametros_pascua redondo_cierra_cuento;
+
+// Llamada de funciones (main, otras, read, print)
+llamada_funciones_nieve ::= main_fiestas redondo_abre_cuento redondo_cierra_cuento | // main sin parametros
+                            main_fiestas redondo_abre_cuento parametros_pascua redondo_cierra_cuento | // main con parametros
+                            identificador_persona redondo_abre_cuento redondo_cierra_cuento | // funcion sin parametros
+                            identificador_persona redondo_abre_cuento parametros_pascua redondo_cierra_cuento | // funcion con parametros
+                            print_narra redondo_abre_cuento parametros_pascua redondo_cierra_cuento | print(abc)
+                            read_escucha redondo_abre_cuento redondo_cierra_cuento | read()
+                            read_escucha redondo_abre_cuento expresion_regalo redondo_cierra_cuento | read(xyz)
+
+
+
+// Ciclos (for. do until, while)
+
+// for
+
+for_fabrica ::= for_envuelve redondo_abre_cuento asig_galleta 
+
+// do until
+
+// while 
+
+// Condicionales (if, else, elif, switch, case)
+
+// Bloques de codigo
+
+// 
