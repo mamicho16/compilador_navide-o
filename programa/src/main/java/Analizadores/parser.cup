@@ -111,10 +111,10 @@ non terminal navidad;
 non terminal tipos_noel, literales_noel;
 
 // Arreglos
-non terminal array_lista_viajes, array_elementos_destinos;
+non terminal array_lista_viajes, array_elementos_destinos;  
 
-// Funciones
-non terminal funcion_bolsanavidena;
+// Expresion
+non terminal expresion_regalo;
 
 // Expresiones arimeticas
 non terminal aritmeticas_regaloprin;
@@ -129,7 +129,7 @@ non terminal logicas_regalomanual;
 non terminal asig_galleta;
 
 // Parametros y funciones
-non terminal parametros_pascua, definir_funcion_leche, defininir_funcion_galletas;
+non terminal parametros_pascua, funcion_bolsanavidena, funcion_gnomo, definir_funcion_leche, defininir_funcion_galletas;
 
 // Llamada de funciones
 non terminal llamada_funciones_nieve;
@@ -157,7 +157,7 @@ precedence left not_baltasar;
 
 start with navidad;
 
-navidad ::= {: hola_mundo(); :} identificador_persona;
+navidad ::= funcion_bolsanavidena;
 
 // Tipos y literales
 tipos_noel ::= int_noel | float_nicolas | bool_kringle | string_sinterklaas terminal int_noel, float_nicolas, bool_kringle, string_sinterklaas | char_pascuero;
@@ -206,6 +206,10 @@ identificador_persona array_lista_viajes asignar_entrega expresion_regalo; // x[
 
 // Parametros y funciones (leche main, galletas otras)
 parametros_pascua ::= expresion_regalo | expresion_regalo separador_luces parametros_pascua; // 4, 5, 1
+
+funcion_bolsanavidena ::= funcion_gnomo | funcion_bolsanavidena funcion_gnomo; // funciones del programa
+
+funcion_gnomo ::= definir_funcion_leche bloque_muneco | defininir_funcion_galletas bloque_muneco; // funciones con bloque de codigo
 
 definir_funcion_leche ::= tipos_noel function_regalo main_fiestas redondo_abre_cuento redondo_cierra_cuento | // int func main ()
                           tipos_noel function_regalo main_fiestas redondo_abre_cuento parametros_pascua redondo_cierra_cuento; // int func main (3, 4) 
