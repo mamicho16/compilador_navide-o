@@ -149,12 +149,6 @@ Asignador = \<\=
   {Separador}                    { return symbol(sym.separador_luces, yytext()); }
   {Asignador}                    { return symbol(sym.asignar_entrega, yytext()); }
 
-  /* comments */
-  {Comment}                      { /* ignore */ }
-  
-  /* whitespace */
-  {WhiteSpace}                   { /* ignore */ }
-
   {Numero}                       { return symbol(sym.l_int_noel, yytext()); }
   {FloatLiteral}                 { return symbol(sym.l_float_nicolas, yytext()); }
   {CharLiteral}                  { return symbol(sym.l_char_pascuero, yytext()); } 
