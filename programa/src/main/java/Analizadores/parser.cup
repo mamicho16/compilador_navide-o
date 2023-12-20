@@ -170,7 +170,7 @@ array_elementos_destinos ::= llave_abre_regalo parametros_pascua llave_cierra_re
 // Expresion
 expresion_regalo ::= literales_noel | identificador_persona | redondo_abre_cuento expresion_regalo redondo_cierra_cuento | logicas_regalomanual | aritmeticas_regaloprin | relacionales_regalocomprado | llamada_funciones_nieve | array_lista_viajes;
 
-// Operaciones arimeticas
+// Operaciones aritmeticas
 aritmeticas_regaloprin ::= expresion_regalo suma_rudolph expresion_regalo | // x + y
 expresion_regalo resta_dasher expresion_regalo | // x - y
 expresion_regalo division_dancer expresion_regalo | // x / y
