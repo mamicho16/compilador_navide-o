@@ -89,7 +89,7 @@ terminal err_malcriado;
 // Estructura gramatical para tarea 1
 
 // Function
-terminal function_regalo;
+terminal function_baston;
 
 // Variable
 terminal local_arbol;
@@ -140,16 +140,6 @@ non terminal for_fabrica, do_regalos, while_repartiendo;
 // Condicionales
 non terminal if_tamal, elif_pavo, else_chanchito, switch_estrellita, case_adorno;
 
-
-
-
-
-
-
-
-
-
-
 // Definiciones para precedencia y asociatividad
 precedece left suma_rudolph, resta_dasher;
 precedence left division_dancer, multiplicacion_prancer;
@@ -174,7 +164,7 @@ array_lista_viajes ::= identificador_persona cuadrado_abre_empaque expresion_reg
 array_elementos_destinos ::= llave_abre_regalo parametros_pascua llave_cierra_regalo; {3, 4, 5, 1}
 
 // Expresion
-expresion_regalo ::= literales_noel | identificador_persona | //falta texto
+expresion_regalo ::= literales_noel | identificador_persona | redondo_abre_cuento expresion_regalo redondo_cierra_cuento | logicas_regalomanual | aritmeticas_regaloprin | relacionales_regalocomprado;
 
 // Operaciones arimeticas
 aritmeticas_regaloprin ::= expresion_regalo suma_rudolph expresion_regalo | // x + y
@@ -224,9 +214,9 @@ llamada_funciones_nieve ::= main_fiestas redondo_abre_cuento redondo_cierra_cuen
                             main_fiestas redondo_abre_cuento parametros_pascua redondo_cierra_cuento | // main con parametros
                             identificador_persona redondo_abre_cuento redondo_cierra_cuento | // funcion sin parametros
                             identificador_persona redondo_abre_cuento parametros_pascua redondo_cierra_cuento | // funcion con parametros
-                            print_narra redondo_abre_cuento parametros_pascua redondo_cierra_cuento | print(abc)
-                            read_escucha redondo_abre_cuento redondo_cierra_cuento | read()
-                            read_escucha redondo_abre_cuento expresion_regalo redondo_cierra_cuento | read(xyz)
+                            print_narra redondo_abre_cuento parametros_pascua redondo_cierra_cuento | //print(abc)
+                            read_escucha redondo_abre_cuento redondo_cierra_cuento | //read()
+                            read_escucha redondo_abre_cuento expresion_regalo redondo_cierra_cuento | //read(xyz)
 
 
 
@@ -261,5 +251,13 @@ switch_estrellita ::= switch_gorro redondo_abre_cuento expresion_regalo redondo_
 case_adorno ::= case_estrella expresion_regalo; // case a
 
 // Bloques de codigo
+bloque_muneco ::= llave_abre_regalo lineas_calabaza llave_cierra_regalo;
+
+lineas_calabaza ::= linea_bola_nieve | lineas_calabaza linea_bola_nieve;
+
+linea_bola_nieve ::= asig_galleta fin_regalo | expresion_regalo fin_regalo | return_confite fin_regalo | break_corta fin_regalo | //do, for, if
 
 // 
+
+return_confite::= return_envia expresion_regalo; // return x
+
