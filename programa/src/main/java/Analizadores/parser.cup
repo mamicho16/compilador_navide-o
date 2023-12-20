@@ -89,7 +89,7 @@ terminal err_malcriado;
 // Estructura gramatical para tarea 1
 
 // Function
-terminal function_regalo;
+terminal function_baston;
 
 // Variable
 terminal local_arbol;
@@ -180,11 +180,11 @@ identificador_persona asignar_entrega expresion_regalo; // x <= 5
 // Parametros y funciones (leche main, galletas otras)
 parametros_pascua ::= expresion_regalo | expresion_regalo separador_luces parametros_pascua;
 
-definir_funcion_leche ::= tipos_noel function_regalo main_fiestas redondo_abre_cuento redondo_cierra_cuento |
-                          tipos_noel function_regalo main_fiestas redondo_abre_cuento parametros_pascua redondo_cierra_cuento;
+definir_funcion_leche ::= tipos_noel function_baston main_fiestas redondo_abre_cuento redondo_cierra_cuento |
+                          tipos_noel function_baston main_fiestas redondo_abre_cuento parametros_pascua redondo_cierra_cuento;
 
-defininir_funcion_galletas ::= tipos_noel function_regalo identificador_persona redondo_abre_cuento redondo_cierra_cuento |
-                               tipos_noel function_regalo identificador_persona redondo_abre_cuento parametros_pascua redondo_cierra_cuento;
+defininir_funcion_galletas ::= tipos_noel function_baston identificador_persona redondo_abre_cuento redondo_cierra_cuento |
+                               tipos_noel function_baston identificador_persona redondo_abre_cuento parametros_pascua redondo_cierra_cuento;
 
 // Llamada de funciones (main, otras, read, print)
 llamada_funciones_nieve ::= main_fiestas redondo_abre_cuento redondo_cierra_cuento | // main sin parametros
