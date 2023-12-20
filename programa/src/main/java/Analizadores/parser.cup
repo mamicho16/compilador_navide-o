@@ -140,6 +140,10 @@ non terminal for_fabrica, do_regalos, while_repartiendo;
 // Condicionales
 non terminal if_tamal, elif_pavo, else_chanchito, switch_estrellita, case_adorno;
 
+// Bloque de codigo y return
+non terminal bloque_muneco, lineas_calabaza, linea_bola_nieve, return_confite;
+
+
 // Definiciones para precedencia y asociatividad
 precedece left suma_rudolph, resta_dasher;
 precedence left division_dancer, multiplicacion_prancer;
@@ -198,7 +202,7 @@ local_arbol tipos_noel identificador_persona asignar_entrega expresion_regalo | 
 identificador_persona asignar_entrega expresion_regalo | // x <= 5
 local_arbol tipos_noel array_lista_viajes | // local int x[5]
 local_arbol tipos_noel array_lista_viajes asignar_entrega array_elementos_destinos | // local int x[5] <= {3, 4, 5, 1, 2}
-identificador_persona array_lista_viajes asignar_entrega expresion_regalo;
+identificador_persona array_lista_viajes asignar_entrega expresion_regalo; // x[2] <= 43
 
 // Parametros y funciones (leche main, galletas otras)
 parametros_pascua ::= expresion_regalo | expresion_regalo separador_luces parametros_pascua; // 4, 5, 1
@@ -251,13 +255,14 @@ switch_estrellita ::= switch_gorro redondo_abre_cuento expresion_regalo redondo_
 case_adorno ::= case_estrella expresion_regalo; // case a
 
 // Bloques de codigo
+
 bloque_muneco ::= llave_abre_regalo lineas_calabaza llave_cierra_regalo;
 
 lineas_calabaza ::= linea_bola_nieve | lineas_calabaza linea_bola_nieve;
 
 linea_bola_nieve ::= asig_galleta fin_regalo | expresion_regalo fin_regalo | return_confite fin_regalo | break_corta fin_regalo | //do, for, if
 
-// 
+// Return
 
 return_confite::= return_envia expresion_regalo; // return x
 
