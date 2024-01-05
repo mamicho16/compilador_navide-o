@@ -35,6 +35,27 @@ public class HTMLTable {
         return HTMLTable.toString();
     }
     
+    public String createTableSimbols(ArrayList<String[]> rows) {
+        StringBuilder HTMLTable = new StringBuilder();
+        
+        HTMLTable.append("<html><body><table border='1'>");
+        
+        // Updated header with new column names
+        HTMLTable.append("<tr><th>Tabla</th><th>Tipo Entrada</th><th>Tipo Dato</th><th>Nombre</th></tr>");
+        
+        for (String[] row: rows) {
+            HTMLTable.append("<tr>");
+            for (String cell: row) {
+                HTMLTable.append("<td>").append(cell).append("</td>");
+            }
+            HTMLTable.append("</tr>");
+        }
+        
+        HTMLTable.append("</table></body></html>");
+        
+        return HTMLTable.toString();
+    }
+    
     public void createHTMLFile(String HTMLTable, String filePath) {
         
         

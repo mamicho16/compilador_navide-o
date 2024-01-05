@@ -23,6 +23,7 @@ public class App {
         // Rutas de los archivos a leer y crear
         String fileName = "src/main/java/Programa/testlexer 7.txt";
         String outputFile = "src/main/java/Programa/resultados.html";
+        String outpurFile2 = "src/main/java/Programa/tablaSim.html";
     
         System.out.println("Leyendo archivo: " + fileName);
         
