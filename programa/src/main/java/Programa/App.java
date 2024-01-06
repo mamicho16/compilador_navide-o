@@ -37,22 +37,27 @@ public class App {
             Symbol token;
             
             while (true) {
-                token = lex.next_token();
-                // Si el token simbolo es diferente a 0 (aun no ha terminado de leer) y si es invalido
-                if (token.sym != 0 && token.sym == sym.err_malcriado) {
-                    System.err.println("En la linea " + token.left + ", columna " + token.right + " el token: " + token.value + " es invalido.");
-                // Si no ha terminado de leer crea las filas para la tabla
-                } else if (token.sym != 0) {
-                    String[] row = new String[5];
-                    row[0] = sym.terminalNames[token.sym];
-                    row[1] = token.value.toString();
-                    row[2] = Integer.toString(token.sym);
-                    row[3] = Integer.toString(token.left);
-                    row[4] = Integer.toString(token.right);
-                    results.add(row);
-                // Se termina de leer y muestra en consola los lexemas encontrados
-                } else {
-                    System.out.println("Cantidad de lexemas encontrados: " +i);
+                try {
+                    token = lex.next_token();
+                    // Si el token simbolo es diferente a 0 (aun no ha terminado de leer) y si es invalido
+                    if (token.sym != 0 && token.sym == sym.err_malcriado) {
+                        System.err.println("En la linea " + token.left + ", columna " + token.right + " el token: " + token.value + " es invalido.");
+                    // Si no ha terminado de leer crea las filas para la tabla
+                    } else if (token.sym != 0) {
+                        String[] row = new String[5];
+                        row[0] = sym.terminalNames[token.sym];
+                        row[1] = token.value.toString();
+                        row[2] = Integer.toString(token.sym);
+                        row[3] = Integer.toString(token.left);
+                        row[4] = Integer.toString(token.right);
+                        results.add(row);
+                    // Se termina de leer y muestra en consola los lexemas encontrados
+                    } else {
+                        System.out.println("Cantidad de lexemas encontrados: " +i);
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
                     break;
                 }
                 i++;

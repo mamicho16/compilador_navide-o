@@ -1,5 +1,6 @@
 package Analizadores;
 import java_cup.runtime.*;
+import java.util.*;
 
 action code {:
 
@@ -7,6 +8,11 @@ public void hola_mundo() {
     System.out.println("Hola Mundo");
 }
 
+HashMap<String, ArrayList<SymbolTableObject>> tablasSimbolos = new HashMap<String, ArrayList<SymbolTableObject>>();
+
+public void addSymbol(SymbolTableObject symbol) {
+    tablasSimbolos.get(currentHash).add(symbol);
+}
 :}
 
 
@@ -18,7 +24,17 @@ parser code {:
         this.lex=lex;
         this.symbolFactory = new DefaultSymbolFactory();
     }
+    
+    public void errorSintax(Symbol token) {
+        if (token.value == null) {
+            return;
+        }
+        System.out.println("Error de sintaxis en la linea " + token.left + " columna " + token.right + ": " + token.value);
+    }
 
+    public void errorSintaxI(Symbol token) throws java.lang.Exception {
+        throw new Exception("Error de sintaxis irrecuperable en la linea " + token.left + " columna " + token.right + ": " + token.value);
+    }
 :}
 
 // Escanear los tokens
@@ -156,8 +172,8 @@ start with navidad;
 navidad ::= funcion_bolsanavidena;
 
 // Tipos y literales
-tipos_noel ::= int_noel | float_nicolas | bool_kringle | string_sinterklaas | char_pascuero;
-literales_noel ::= l_string_sinterklaas | l_char_pascuero | l_int_noel | l_float_nicolas | l_true_olentzero | l_false_jesus;
+tipos_noel ::= int_noel:t {: RESULT = t; :} | float_nicolas:t {: RESULT = t; :} | bool_kringle:t {: RESULT = t; :} | string_sinterklaas:t {: RESULT = t; :} | char_pascuero:t {: RESULT = t; :};
+literales_noel ::= l_string_sinterklaas:l {: RESULT = l; :} | l_char_pascuero:l {: RESULT = l; :} | l_int_noel:l {: RESULT = l; :} | l_float_nicolas:l {: RESULT = l; :} | l_true_olentzero:l {: RESULT = l; :} | l_false_jesus:l {: RESULT = l; :}; 
 
 // Arreglos
 array_lista_viajes ::= identificador_persona cuadrado_abre_empaque expresion_regalo cuadrado_cierra_empaque; // x[3]
@@ -196,7 +212,7 @@ expresion_regalo or_gaspar expresion_regalo | // x # y
 not_baltasar expresion_regalo; // !x
 
 // Asignacion de variables
-asig_galleta ::= local_arbol tipos_noel identificador_persona | // local int x
+asig_galleta ::= local_arbol tipos_noel:t identificador_persona:id {:} | // local int x
 local_arbol tipos_noel identificador_persona asignar_entrega expresion_regalo | // local int x <= 5
 identificador_persona asignar_entrega expresion_regalo | // x <= 5
 local_arbol tipos_noel array_lista_viajes | // local int x[5]
