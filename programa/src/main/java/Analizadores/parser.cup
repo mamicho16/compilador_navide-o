@@ -11,6 +11,11 @@ public void hola_mundo() {
 HashMap<String, ArrayList<SymbolObject>> tablasSimbolos = new HashMap<String, ArrayList<SymbolObject>>();
 String hash = "";
 
+public void addHash(String newHash) {
+    hash = newHash;
+    tablasSimbolos.put(newHash, new ArrayList<SymbolObject>());
+
+}
 public void addSymbol(SymbolObject symbol) {
     tablasSimbolos.get(hash).add(symbol);
 }
@@ -31,6 +36,7 @@ parser code {:
             return;
         }
         System.out.println("Error de sintaxis en la linea " + token.left + " columna " + token.right + ": " + token.value);
+        System.out.println("Continuando con el parsing");
     }
 
     public void errorSintaxI(Symbol token) throws java.lang.Exception {
@@ -61,7 +67,8 @@ terminal and_melchor, or_gaspar, not_baltasar;
 // Identificador
 terminal identificador_persona;
 
-
+// Funciones
+terminal function_regalo;
 
 // Tipos de datos
 terminal int_noel, float_nicolas, bool_kringle, string_sinterklaas;
@@ -170,11 +177,11 @@ start with navidad;
 navidad ::= funcion_bolsanavidena;
 
 // Tipos y literales
-tipos_noel ::= int_noel:t {: RESULT = t; :} | float_nicolas:t {: RESULT = t; :} | bool_kringle:t {: RESULT = t; :} | string_sinterklaas:t {: RESULT = t; :} | char_pascuero:t {: RESULT = t; :};
-literales_noel ::= l_string_sinterklaas:l {: RESULT = l; :} | l_char_pascuero:l {: RESULT = l; :} | l_int_noel:l {: RESULT = l; :} | l_float_nicolas:l {: RESULT = l; :} | l_true_olentzero:l {: RESULT = l; :} | l_false_jesus:l {: RESULT = l; :}; 
+tipos_noel ::= int_noel:type {: RESULT = type; :} | float_nicolas:type {: RESULT = type; :} | bool_kringle:type {: RESULT = type; :} | string_sinterklaas:type {: RESULT = type; :} | char_pascuero:type {: RESULT = type; :};
+literales_noel ::= l_string_sinterklaas:literal {: RESULT = literal; :} | l_char_pascuero:literal {: RESULT = literal; :} | l_int_noel:literal {: RESULT = literal; :} | l_float_nicolas:literal {: RESULT = literal; :} | l_true_olentzero:literal {: RESULT = literal; :} | l_false_jesus:literal {: RESULT = literal; :}; 
 
 // Arreglos
-array_lista_viajes ::= identificador_persona cuadrado_abre_empaque expresion_regalo cuadrado_cierra_empaque; // x[3]
+array_lista_viajes ::= identificador_persona:id cuadrado_abre_empaque expresion_regalo cuadrado_cierra_empaque {: RESULT = id.toString() :}; // x[3]
 array_elementos_destinos ::= llave_abre_regalo parametros_pascua llave_cierra_regalo; // {3, 4, 5, 1}
 
 // Expresion
@@ -219,17 +226,34 @@ identificador_persona array_lista_viajes asignar_entrega expresion_regalo; // x[
 
 // Parametros y funciones (leche main, galletas otras)
 
-parametros_pascua ::= expresion_regalo | expresion_regalo separador_luces parametros_pascua; // 4, 5, 1
+parametro_pascua ::= tipos_noel:type identificador_persona:id {: SymbolObject symbol = new SymbolObject("param", type.toString(), id.toString();
+                                                                 addSymbol(symbol);
+                                                               :}
+parametros_pascua ::= parametro_pascua | parametro_pascua separador_luces parametro_pascua; // 4, 5, 1
 
 funcion_bolsanavidena ::= funcion_gnomo | funcion_bolsanavidena funcion_gnomo; // funciones del programa
 
 funcion_gnomo ::= definir_funcion_leche bloque_muneco | defininir_funcion_galletas bloque_muneco; // funciones con bloque de codigo
 
-definir_funcion_leche ::= tipos_noel function_regalo main_fiestas redondo_abre_cuento redondo_cierra_cuento | // int func main ()
-                          tipos_noel function_regalo main_fiestas redondo_abre_cuento parametros_pascua redondo_cierra_cuento; // int func main (3, 4) 
+// Aqui se definen los hash segun la funcion
+definir_funcion_leche ::= tipos_noel:type function_regalo:func main_fiestas:main redondo_abre_cuento redondo_cierra_cuento  {: addHash("main");
+                                                                                                                               SymbolObject symbol = new SymbolObject(func.toString(), type.toString(), main.toString());
+                                                                                                                               addSymbol(symbol);
+                                                                                                                             :}| // int func main ()
 
-defininir_funcion_galletas ::= tipos_noel function_regalo identificador_persona redondo_abre_cuento redondo_cierra_cuento | // int func myfunc ()
-                               tipos_noel function_regalo identificador_persona redondo_abre_cuento parametros_pascua redondo_cierra_cuento; // int func myfunc (3, 4)
+                          tipos_noel:type function_regalo:func main_fiestas:main redondo_abre_cuento parametros_pascua redondo_cierra_cuento  {: addHash("main");
+                                                                                                                                                 SymbolObject symbol = new SymbolObject(func.toString(), type.toString(), main.toString());
+                                                                                                                                                 addSymbol(symbol);
+                                                                                                                                                :}; // int func main (3, 4) 
+
+defininir_funcion_galletas ::= tipos_noel:type function_regalo:func identificador_persona:id redondo_abre_cuento redondo_cierra_cuento  {: addHash(id.toString());
+                                                                                                                                           SymbolObject symbol = new SymbolObject(func.toString(), type.toString(), main.toString());
+                                                                                                                                           addSymbol(symbol);
+                                                                                                                                         :} | // int func myfunc ()
+                               tipos_noel:type function_regalo:func identificador_persona:id redondo_abre_cuento parametros_pascua redondo_cierra_cuento  {: addHash(id.toString());
+                                                                                                                                                             SymbolObject symbol = new SymbolObject(func.toString(), type.toString(), main.toString());
+                                                                                                                                                             addSymbol(symbol);
+                                                                                                                                                           :}; // int func myfunc (3, 4)
 
 // Llamada de funciones (main, otras, read, print)
 llamada_funciones_nieve ::= main_fiestas redondo_abre_cuento redondo_cierra_cuento | // main sin parametros
@@ -238,7 +262,7 @@ llamada_funciones_nieve ::= main_fiestas redondo_abre_cuento redondo_cierra_cuen
                             identificador_persona redondo_abre_cuento parametros_pascua redondo_cierra_cuento | // funcion con parametros
                             print_narra redondo_abre_cuento parametros_pascua redondo_cierra_cuento | //print(abc)
                             read_escucha redondo_abre_cuento redondo_cierra_cuento | //read()
-                            read_escucha redondo_abre_cuento expresion_regalo redondo_cierra_cuento | //read(xyz)
+                            read_escucha redondo_abre_cuento expresion_regalo redondo_cierra_cuento; //read(xyz)
 
 
 
