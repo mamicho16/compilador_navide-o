@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Programa;
+package Analizadores;
 
 /**
  *
  * @author mamic
  */
-public class Symbol {
+public class SymbolObject {
     private String tipoEntrada;
     private String tipoDato; 
     private String nombre;
 
-    public Symbol(String tipoEntrada, String tipoDato, String nombre) {
+    public SymbolObject(String tipoEntrada, String tipoDato, String nombre) {
         this.tipoEntrada = tipoEntrada;
         this.tipoDato = tipoDato;
         this.nombre = nombre;

@@ -8,10 +8,11 @@ public void hola_mundo() {
     System.out.println("Hola Mundo");
 }
 
-HashMap<String, ArrayList<SymbolTableObject>> tablasSimbolos = new HashMap<String, ArrayList<SymbolTableObject>>();
+HashMap<String, ArrayList<SymbolObject>> tablasSimbolos = new HashMap<String, ArrayList<SymbolObject>>();
+String hash = "";
 
-public void addSymbol(SymbolTableObject symbol) {
-    tablasSimbolos.get(currentHash).add(symbol);
+public void addSymbol(SymbolObject symbol) {
+    tablasSimbolos.get(hash).add(symbol);
 }
 :}
 
@@ -103,9 +104,6 @@ terminal main_fiestas;
 terminal err_malcriado;
 
 // Estructura gramatical para tarea 1
-
-// Function
-terminal function_baston;
 
 // Variable
 terminal local_arbol;
