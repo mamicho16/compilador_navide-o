@@ -2,6 +2,6 @@ IC-5701 Compiladores e Intérpretes
 Verano 2023
 Greivin Mauricio Fernández Brizuela c.2022437510
 Daniel Alonso Garbanzo Carvajal c.2022117129 
-Proyecto programado 1
-16 de diciembre de 2023
+Proyecto programado 2
+6 de enero de 2024
 Excelente
