@@ -64,6 +64,7 @@ parser code {:
         this.symbolFactory = new DefaultSymbolFactory();
     }
     
+    @Override
     public void syntax_error(Symbol token) {
         if (token.value == null) {
             return;
@@ -71,7 +72,8 @@ parser code {:
         System.out.println("Error de sintaxis en la linea " + token.left + " columna " + token.right + ": " + token.value);
         System.out.println("Continuando con el parsing");
     }
-
+    
+    @Override
     public void unrecovered_syntax_error(Symbol token) throws java.lang.Exception {
         throw new Exception("Error de sintaxis irrecuperable en la linea " + token.left + " columna " + token.right + ": " + token.value);
     }
@@ -332,7 +334,7 @@ else_chanchito ::= else_duende bloque_muneco;
 
 // Bloques de codigo
 
-bloque_muneco ::= llave_abre_regalo lineas_calabaza llave_cierra_regalo;
+bloque_muneco ::= llave_abre_regalo lineas_calabaza llave_cierra_regalo | llave_abre_regalo llave_cierra_regalo;
 
 lineas_calabaza ::= linea_bola_nieve | lineas_calabaza linea_bola_nieve;
 
@@ -340,9 +342,9 @@ linea_bola_nieve ::= asig_galleta fin_regalo |
 expresion_regalo fin_regalo |
 return_confite fin_regalo |
 break_corta fin_regalo |
-if_tamal |
-do_regalos |
-for_fabrica; //do, for, if
+if_tamal fin_regalo|
+do_regalos fin_regalo|
+for_fabrica fin_regalo; //do, for, if
 
 // Return
 

@@ -86,6 +86,7 @@ Asignador = \<\=
 
 /* keywords */
 <YYINITIAL> "function"           { return symbol(sym.function_regalo, "function"); }
+<YYINITIAL> "local"              { return symbol(sym.local_arbol, "local"); }
 <YYINITIAL> "boolean"            { return symbol(sym.bool_kringle, "boolean"); }
 <YYINITIAL> "int"                { return symbol(sym.int_noel, "int"); }
 <YYINITIAL> "float"              { return symbol(sym.float_nicolas, "float"); }
