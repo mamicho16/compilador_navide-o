@@ -1,4 +1,5 @@
 package Analizadores;
+import Programa.HTMLTable;
 import java_cup.runtime.*;
 import java.util.*;
 
@@ -63,7 +64,7 @@ parser code {:
         this.symbolFactory = new DefaultSymbolFactory();
     }
     
-    public void errorSintax(Symbol token) {
+    public void syntax_error(Symbol token) {
         if (token.value == null) {
             return;
         }
@@ -71,7 +72,7 @@ parser code {:
         System.out.println("Continuando con el parsing");
     }
 
-    public void errorSintaxI(Symbol token) throws java.lang.Exception {
+    public void unrecovered_syntax_error(Symbol token) throws java.lang.Exception {
         throw new Exception("Error de sintaxis irrecuperable en la linea " + token.left + " columna " + token.right + ": " + token.value);
     }
 :}
@@ -176,7 +177,7 @@ non terminal logicas_regalomanual;
 non terminal asig_galleta;
 
 // Parametros y funciones
-non terminal parametro_pascua, parametros_pascua, funcion_bolsanavidena, funcion_gnomo, definir_funcion_leche, defininir_funcion_galletas;
+non terminal argumento_rompope, parametro_pascua, parametros_pascua, funcion_bolsanavidena, funcion_gnomo, definir_funcion_leche, defininir_funcion_galletas;
 
 // Llamada de funciones
 non terminal llamada_funciones_nieve;
@@ -204,15 +205,17 @@ precedence left not_baltasar;
 
 start with navidad;
 
-navidad ::= funcion_bolsanavidena;
+navidad ::= funcion_bolsanavidena {: createSymbolTable();
+                                     printSymbolTable();
+                                   :};
 
 // Tipos y literales
 tipos_noel ::= int_noel:type {: RESULT = type; :} | float_nicolas:type {: RESULT = type; :} | bool_kringle:type {: RESULT = type; :} | string_sinterklaas:type {: RESULT = type; :} | char_pascuero:type {: RESULT = type; :};
 literales_noel ::= l_string_sinterklaas:literal {: RESULT = literal; :} | l_char_pascuero:literal {: RESULT = literal; :} | l_int_noel:literal {: RESULT = literal; :} | l_float_nicolas:literal {: RESULT = literal; :} | l_true_olentzero:literal {: RESULT = literal; :} | l_false_jesus:literal {: RESULT = literal; :}; 
 
 // Arreglos
-array_lista_viajes ::= identificador_persona:id cuadrado_abre_empaque expresion_regalo cuadrado_cierra_empaque {: RESULT = id.toString() :}; // x[3]
-array_elementos_destinos ::= llave_abre_regalo parametros_pascua llave_cierra_regalo; // {3, 4, 5, 1}
+array_lista_viajes ::= identificador_persona:id cuadrado_abre_empaque expresion_regalo cuadrado_cierra_empaque {: RESULT = id.toString(); :}; // x[3]
+array_elementos_destinos ::= llave_abre_regalo argumento_rompope llave_cierra_regalo; // {3, 4, 5, 1}
 
 // Expresion
 expresion_regalo ::= literales_noel | identificador_persona | 
@@ -228,9 +231,8 @@ expresion_regalo multiplicacion_prancer expresion_regalo | // x * y
 expresion_regalo modulo_vixen expresion_regalo | // x ~ y
 expresion_regalo potencia_comet expresion_regalo | // x ** y
 aumentar_quien expresion_regalo | // ++x
-disminuir_grinch expresion_regalo | // --x
-aumentar_quien array_lista_viajes | // ++x[1]
-disminuir_grinch array_lista_viajes; // --x[3]
+disminuir_grinch expresion_regalo; // --x
+
 
 
 // Operaciones relacionales
@@ -247,24 +249,26 @@ expresion_regalo or_gaspar expresion_regalo | // x # y
 not_baltasar expresion_regalo; // !x
 
 // Asignacion de variables
-asig_galleta ::= local_arbol:local tipos_noel:type identificador_persona:id {: SymbolObject symbol = new SymbolObject(local.toString(), type.toString(), id.toString();
+asig_galleta ::= local_arbol tipos_noel:type identificador_persona:id {: SymbolObject symbol = new SymbolObject("local", type.toString(), id.toString());
                                                                                addSymbol(symbol);
-                                                                             :}| // local int x
-local_arbol:local tipos_noel:type identificador_persona:id asignar_entrega expresion_regalo {: SymbolObject symbol = new SymbolObject(local.toString(), type.toString(), id.toString();
-                                                                               a               ddSymbol(symbol);
-                                                                                             :}| // local int x <= 5
+                                                                             :} | // local int x
+local_arbol tipos_noel:type identificador_persona:id asignar_entrega expresion_regalo {: SymbolObject symbol = new SymbolObject("local", type.toString(), id.toString());
+                                                                                               addSymbol(symbol);
+                                                                                             :} | // local int x <= 5
 identificador_persona asignar_entrega expresion_regalo | // x <= 5
-local_arbol:local tipos_noel:type array_lista_viajes:id  {: SymbolObject symbol = new SymbolObject(local.toString(), type.toString() + "[]", id.toString();
+local_arbol tipos_noel:type array_lista_viajes:id  {: SymbolObject symbol = new SymbolObject("local", type.toString() + "[]", id.toString());
                                                             addSymbol(symbol);
-                                                          :}| // local int x[5]
-local_arbol:local tipos_noel:type array_lista_viajes:id asignar_entrega array_elementos_destinos {: SymbolObject symbol = new SymbolObject(local.toString(), type.toString() + "[]", id.toString();
+                                                          :}| // local int x[5]   
+local_arbol tipos_noel:type array_lista_viajes:id asignar_entrega array_elementos_destinos {: SymbolObject symbol = new SymbolObject("local", type.toString() + "[]", id.toString());
                                                                                                     addSymbol(symbol);
                                                                                                   :}| // local int x[5] <= {3, 4, 5, 1, 2}
 identificador_persona array_lista_viajes asignar_entrega expresion_regalo; // x[2] <= 43
 
 // Parametros y funciones (leche main, galletas otras)
 
-parametro_pascua ::= tipos_noel:type identificador_persona:id {: SymbolObject symbol = new SymbolObject("param", type.toString(), id.toString();
+argumento_rompope::= expresion_regalo | argumento_rompope separador_luces expresion_regalo;
+
+parametro_pascua ::= tipos_noel:type identificador_persona:id {: SymbolObject symbol = new SymbolObject("param", type.toString(), id.toString());
                                                                  addSymbol(symbol);
                                                                :};
 parametros_pascua ::= parametro_pascua | parametro_pascua separador_luces parametro_pascua; // 4, 5, 1
@@ -274,31 +278,31 @@ funcion_bolsanavidena ::= funcion_gnomo | funcion_bolsanavidena funcion_gnomo; /
 funcion_gnomo ::= definir_funcion_leche bloque_muneco | defininir_funcion_galletas bloque_muneco; // funciones con bloque de codigo
 
 // Aqui se definen los hash segun la funcion
-definir_funcion_leche ::= tipos_noel:type function_regalo:func main_fiestas:main redondo_abre_cuento redondo_cierra_cuento  {: addHash("main");
-                                                                                                                               SymbolObject symbol = new SymbolObject(func.toString(), type.toString(), main.toString());
+definir_funcion_leche ::= tipos_noel:type function_regalo main_fiestas:main redondo_abre_cuento redondo_cierra_cuento  {: addHash("main");
+                                                                                                                               SymbolObject symbol = new SymbolObject("function", type.toString(), "main");
                                                                                                                                addSymbol(symbol);
                                                                                                                              :}| // int func main ()
 
-                          tipos_noel:type function_regalo:func main_fiestas:main redondo_abre_cuento parametros_pascua redondo_cierra_cuento  {: addHash("main");
-                                                                                                                                                 SymbolObject symbol = new SymbolObject(func.toString(), type.toString(), main.toString());
+                          tipos_noel:type function_regalo main_fiestas:main redondo_abre_cuento parametros_pascua redondo_cierra_cuento  {: addHash("main");
+                                                                                                                                                 SymbolObject symbol = new SymbolObject("function", type.toString(), "main");
                                                                                                                                                  addSymbol(symbol);
                                                                                                                                                 :}; // int func main (3, 4) 
 
-defininir_funcion_galletas ::= tipos_noel:type function_regalo:func identificador_persona:id redondo_abre_cuento redondo_cierra_cuento  {: addHash(id.toString());
-                                                                                                                                           SymbolObject symbol = new SymbolObject(func.toString(), type.toString(), main.toString());
+defininir_funcion_galletas ::= tipos_noel:type function_regalo identificador_persona:id redondo_abre_cuento redondo_cierra_cuento  {: addHash(id.toString());
+                                                                                                                                           SymbolObject symbol = new SymbolObject("function", type.toString(), id.toString());
                                                                                                                                            addSymbol(symbol);
                                                                                                                                          :} | // int func myfunc ()
-                               tipos_noel:type function_regalo:func identificador_persona:id redondo_abre_cuento parametros_pascua redondo_cierra_cuento  {: addHash(id.toString());
-                                                                                                                                                             SymbolObject symbol = new SymbolObject(func.toString(), type.toString(), main.toString());
+                               tipos_noel:type function_regalo identificador_persona:id redondo_abre_cuento parametros_pascua redondo_cierra_cuento  {: addHash(id.toString());
+                                                                                                                                                             SymbolObject symbol = new SymbolObject("function", type.toString(), id.toString());
                                                                                                                                                              addSymbol(symbol);
                                                                                                                                                            :}; // int func myfunc (3, 4)
 
 // Llamada de funciones (main, otras, read, print)
 llamada_funciones_nieve ::= main_fiestas redondo_abre_cuento redondo_cierra_cuento | // main sin parametros
-                            main_fiestas redondo_abre_cuento parametros_pascua redondo_cierra_cuento | // main con parametros
+                            main_fiestas redondo_abre_cuento argumento_rompope redondo_cierra_cuento | // main con parametros
                             identificador_persona redondo_abre_cuento redondo_cierra_cuento | // funcion sin parametros
-                            identificador_persona redondo_abre_cuento parametros_pascua redondo_cierra_cuento | // funcion con parametros
-                            print_narra redondo_abre_cuento parametros_pascua redondo_cierra_cuento | //print(abc)
+                            identificador_persona redondo_abre_cuento argumento_rompope redondo_cierra_cuento | // funcion con parametros
+                            print_narra redondo_abre_cuento argumento_rompope redondo_cierra_cuento | //print(abc)
                             read_escucha redondo_abre_cuento redondo_cierra_cuento | //read()
                             read_escucha redondo_abre_cuento expresion_regalo redondo_cierra_cuento; //read(xyz)
 
@@ -336,7 +340,9 @@ linea_bola_nieve ::= asig_galleta fin_regalo |
 expresion_regalo fin_regalo |
 return_confite fin_regalo |
 break_corta fin_regalo |
-if_tamal; //do, for, if
+if_tamal |
+do_regalos |
+for_fabrica; //do, for, if
 
 // Return
 

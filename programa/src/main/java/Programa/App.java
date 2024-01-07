@@ -5,6 +5,7 @@
 package Programa;
 
 import Analizadores.Lexer;
+import Analizadores.Parser;
 import Analizadores.sym;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -21,9 +22,8 @@ public class App {
     
     public static void main(String[] args) {
         // Rutas de los archivos a leer y crear
-        String fileName = "src/main/java/Programa/testlexer 7.txt";
+        String fileName = "src/main/java/Programa/test.txt";
         String outputFile = "src/main/java/Programa/resultados.html";
-        String outpurFile2 = "src/main/java/Programa/tablaSim.html";
     
         System.out.println("Leyendo archivo: " + fileName);
         
@@ -74,6 +74,19 @@ public class App {
         // Escribe el archivo HTML con los resultados guardados
         tableGenerator.createHTMLFile(table, outputFile);
         System.out.println("Tabla HTML con resultados guardada en: " + outputFile);
+        
+        
+        System.out.println("Leyendo archivo de sintaxis: " + fileName);
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            Lexer lexer = new Lexer(reader);
+            Parser parsing = new Parser(lexer);
+            parsing.parse();
+            // Si no hay error, fue exitoso el analisis
+            System.out.println("Archivo analizado y creado exitosamente.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al analizar el archivo. No se puede generar por gramatica.");
+        }
     }
    
 }
