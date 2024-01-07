@@ -11,6 +11,38 @@ public void hola_mundo() {
 HashMap<String, ArrayList<SymbolObject>> tablasSimbolos = new HashMap<String, ArrayList<SymbolObject>>();
 String hash = "";
 
+public void createSymbolTable() {
+    ArrayList<String[]> rows = new ArrayList<String[]>();
+
+    for (String key: tablasSimbolos.keySet()) {
+        for (SymbolObject val: tablasSimbolos.get(key)) {
+            String[] row = new String[]{key, val.getTipoEntrada(), val.getNombre(), val.getTipoDato()};
+            rows.add(row);
+        }
+    }
+    // Instancia la clase para crear la tabla de simbolos
+    HTMLTable tableGenerator = new HTMLTable();
+    // Crea la tabla con los resultados
+    String table = tableGenerator.createSymTable(rows);
+    // Escribe el archivo HTML
+    String outputFile = "src/main/java/Programa/tablaSim.html";
+    tableGenerator.createHTMLFile(table, outputFile);
+    System.out.println("Tabla de Simbolos creada en: " + outputFile);
+
+}
+
+public void printSymbolTable() {
+    
+    for (String key: tablasSimbolos.keySet()) {
+        System.out.println("Tabla de simbolos: " + key);
+        System.out.println("Valores: ");
+        for (SymbolObject val: tablasSimbolos.get(key)) {
+            System.out.println(val.toString());
+        }
+    }
+}
+
+
 public void addHash(String newHash) {
     hash = newHash;
     tablasSimbolos.put(newHash, new ArrayList<SymbolObject>());
@@ -71,8 +103,7 @@ terminal identificador_persona;
 terminal function_regalo;
 
 // Tipos de datos
-terminal int_noel, float_nicolas, bool_kringle, string_sinterklaas;
-terminal char_pascuero, null_joulupukki, struct_colacho, void_painatal;
+terminal int_noel, float_nicolas, bool_kringle, string_sinterklaas, char_pascuero;
 
 // Literales
 terminal l_string_sinterklaas, l_char_pascuero;
@@ -90,7 +121,6 @@ terminal llave_abre_regalo, llave_cierra_regalo;
 // Estructura de control
 terminal if_elfo, elif_hada, else_duende, for_envuelve;
 terminal do_hace, until_revisa, return_envia, break_corta;
-terminal while_repite, switch_gorro, case_estrella, default_navidad, in_envuelto;
 
 // Print y read
 terminal print_narra, read_escucha;
@@ -146,16 +176,16 @@ non terminal logicas_regalomanual;
 non terminal asig_galleta;
 
 // Parametros y funciones
-non terminal parametros_pascua, funcion_bolsanavidena, funcion_gnomo, definir_funcion_leche, defininir_funcion_galletas;
+non terminal parametro_pascua, parametros_pascua, funcion_bolsanavidena, funcion_gnomo, definir_funcion_leche, defininir_funcion_galletas;
 
 // Llamada de funciones
 non terminal llamada_funciones_nieve;
 
 // Ciclos
-non terminal for_fabrica, do_regalos, while_repartiendo;
+non terminal for_fabrica, do_regalos;
 
 // Condicionales
-non terminal if_tamal, elif_pavo, else_chanchito, switch_estrellita, case_adorno;
+non terminal if_tamal, elif_pavo, else_chanchito;
 
 // Bloque de codigo y return
 non terminal bloque_muneco, lineas_calabaza, linea_bola_nieve, return_confite;
@@ -217,18 +247,26 @@ expresion_regalo or_gaspar expresion_regalo | // x # y
 not_baltasar expresion_regalo; // !x
 
 // Asignacion de variables
-asig_galleta ::= local_arbol tipos_noel:t identificador_persona:id {:} | // local int x
-local_arbol tipos_noel identificador_persona asignar_entrega expresion_regalo | // local int x <= 5
+asig_galleta ::= local_arbol:local tipos_noel:type identificador_persona:id {: SymbolObject symbol = new SymbolObject(local.toString(), type.toString(), id.toString();
+                                                                               addSymbol(symbol);
+                                                                             :}| // local int x
+local_arbol:local tipos_noel:type identificador_persona:id asignar_entrega expresion_regalo {: SymbolObject symbol = new SymbolObject(local.toString(), type.toString(), id.toString();
+                                                                               a               ddSymbol(symbol);
+                                                                                             :}| // local int x <= 5
 identificador_persona asignar_entrega expresion_regalo | // x <= 5
-local_arbol tipos_noel array_lista_viajes | // local int x[5]
-local_arbol tipos_noel array_lista_viajes asignar_entrega array_elementos_destinos | // local int x[5] <= {3, 4, 5, 1, 2}
+local_arbol:local tipos_noel:type array_lista_viajes:id  {: SymbolObject symbol = new SymbolObject(local.toString(), type.toString() + "[]", id.toString();
+                                                            addSymbol(symbol);
+                                                          :}| // local int x[5]
+local_arbol:local tipos_noel:type array_lista_viajes:id asignar_entrega array_elementos_destinos {: SymbolObject symbol = new SymbolObject(local.toString(), type.toString() + "[]", id.toString();
+                                                                                                    addSymbol(symbol);
+                                                                                                  :}| // local int x[5] <= {3, 4, 5, 1, 2}
 identificador_persona array_lista_viajes asignar_entrega expresion_regalo; // x[2] <= 43
 
 // Parametros y funciones (leche main, galletas otras)
 
 parametro_pascua ::= tipos_noel:type identificador_persona:id {: SymbolObject symbol = new SymbolObject("param", type.toString(), id.toString();
                                                                  addSymbol(symbol);
-                                                               :}
+                                                               :};
 parametros_pascua ::= parametro_pascua | parametro_pascua separador_luces parametro_pascua; // 4, 5, 1
 
 funcion_bolsanavidena ::= funcion_gnomo | funcion_bolsanavidena funcion_gnomo; // funciones del programa
@@ -276,25 +314,17 @@ for_fabrica ::= for_envuelve redondo_abre_cuento asig_galleta fin_regalo expresi
 
 do_regalos ::= do_hace bloque_muneco until_revisa redondo_abre_cuento expresion_regalo redondo_cierra_cuento;
 
-// while = while () {}
-
-while_repartiendo ::= while_repite redondo_abre_cuento expresion_regalo redondo_cierra_cuento bloque_muneco; 
-
 // Condicionales (if, else, elif, switch, case)
 
 if_tamal ::= if_elfo redondo_abre_cuento expresion_regalo redondo_cierra_cuento bloque_muneco | // if (x) {}
              if_elfo redondo_abre_cuento expresion_regalo redondo_cierra_cuento bloque_muneco else_chanchito | // if (x) {} else {}
-             if_elfo redondo_abre_cuento expresion_regalo redondo_cierra_cuento bloque_muneco elif_pavo | if (x) {} elif (y) {} ...
-             if_elfo redondo_abre_cuento expresion_regalo redondo_cierra_cuento bloque_muneco elif_pavo else_chanchito; if (x) {} elif (y) {} else {} 
+             if_elfo redondo_abre_cuento expresion_regalo redondo_cierra_cuento bloque_muneco elif_pavo | // if (x) {} elif (y) {} ...
+             if_elfo redondo_abre_cuento expresion_regalo redondo_cierra_cuento bloque_muneco elif_pavo else_chanchito; // if (x) {} elif (y) {} else {} 
 
 elif_pavo ::= elif_hada redondo_abre_cuento expresion_regalo redondo_cierra_cuento bloque_muneco | // elif (x) {}
               elif_hada redondo_abre_cuento expresion_regalo redondo_cierra_cuento bloque_muneco elif_pavo; // elif (x) {} elif (y) {}...
 
 else_chanchito ::= else_duende bloque_muneco;
-
-switch_estrellita ::= switch_gorro redondo_abre_cuento expresion_regalo redondo_cierra_cuento bloque_muneco; // switch () {}
-
-case_adorno ::= case_estrella expresion_regalo; // case a
 
 // Bloques de codigo
 

@@ -35,7 +35,7 @@ public class HTMLTable {
         return HTMLTable.toString();
     }
     
-    public String createTableSimbols(ArrayList<String[]> rows) {
+    public String createSymTable(ArrayList<String[]> rows) {
         StringBuilder HTMLTable = new StringBuilder();
         
         HTMLTable.append("<html><body><table border='1'>");
