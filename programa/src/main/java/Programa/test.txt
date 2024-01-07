@@ -1,12 +1,37 @@
+string nombreHeroe <= "Leonidas"| @ Inicialización de cadena
 
+int energia <= 100 |
 
+@ Comprobando que no se confundan palabras reservadas
+@ en nombres de variables
+
+int fuerzaHeroe|
+
+do {
+    --energia|
+    print("Energía actual: ", energia)|
+} until (energia == 0)
+
+float agilidad <= 20.5 - 3.1 + -5| 
+float resistencia <= 2.3|
+float velocidad <= -1.2|
+float precision <= -6.7|
 /_ 
-esto es un comentario multilinea
+    Comentario multilinea sobre las estadísticas
 _/
-45.0
-100
-"hola"
-101
-102
-45id
-103
+++energia|
+energia <= 5 - -3| 
+
+@ Definiendo nuevas funciones
+function int multiplicar(int num1, int num2) {
+    return num1 * num2|
+}
+
+string mision <= "Defender el reino"| @ Definiendo el objetivo
+
+float distanciaRecorrida <= 120.4 - 60.2 + 15|
+
+@ Función para cálculo de distancias
+function float calcularDistancia(float distancia, float tiempo) {
+    return distancia / tiempo|
+}

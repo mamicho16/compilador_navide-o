@@ -86,24 +86,18 @@ Asignador = \<\=
 
 /* keywords */
 <YYINITIAL> "function"           { return symbol(sym.function_regalo, "function"); }
+<YYINITIAL> "local"              { return symbol(sym.local_arbol, "local"); }
 <YYINITIAL> "boolean"            { return symbol(sym.bool_kringle, "boolean"); }
 <YYINITIAL> "int"                { return symbol(sym.int_noel, "int"); }
 <YYINITIAL> "float"              { return symbol(sym.float_nicolas, "float"); }
 <YYINITIAL> "string"             { return symbol(sym.string_sinterklaas, "string"); }
-<YYINITIAL> "struct"             { return symbol(sym.struct_colacho, "struct"); }
 <YYINITIAL> "char"               { return symbol(sym.char_pascuero, "char"); }
-<YYINITIAL> "null"               { return symbol(sym.null_joulupukki, "null"); }
 <YYINITIAL> "if"                 { return symbol(sym.if_elfo, "if"); }
 <YYINITIAL> "elif"               { return symbol(sym.elif_hada, "elif"); }
 <YYINITIAL> "else"               { return symbol(sym.else_duende, "else"); }
 <YYINITIAL> "for"                { return symbol(sym.for_envuelve, "for"); }
-<YYINITIAL> "while"              { return symbol(sym.while_repite, "while"); }
 <YYINITIAL> "do"                 { return symbol(sym.do_hace, "do"); }
-<YYINITIAL> "case"               { return symbol(sym.case_estrella, "case"); }
-<YYINITIAL> "switch"             { return symbol(sym.switch_gorro, "switch"); }
 <YYINITIAL> "until"              { return symbol(sym.until_revisa, "until"); }
-<YYINITIAL> "default"            { return symbol(sym.default_navidad, "default"); }
-<YYINITIAL> "void"               { return symbol(sym.void_painatal, "void"); }
 <YYINITIAL> "false"              { return symbol(sym.l_false_jesus, "false"); }
 <YYINITIAL> "main"               { return symbol(sym.main_fiestas, "main"); }
 <YYINITIAL> "true"               { return symbol(sym.l_true_olentzero, "true"); }
@@ -111,7 +105,6 @@ Asignador = \<\=
 <YYINITIAL> "break"              { return symbol(sym.break_corta, "break"); }
 <YYINITIAL> "print"              { return symbol(sym.print_narra, "print"); }
 <YYINITIAL> "return"             { return symbol(sym.return_envia, "return"); }
-<YYINITIAL> "in"                 { return symbol(sym.in_envuelto, "in"); }
 
 <YYINITIAL> {
    \" { string.setLength(0); yybegin(STRING); }
@@ -148,12 +141,6 @@ Asignador = \<\=
   {Pipe}                         { return symbol(sym.fin_regalo, yytext()); }
   {Separador}                    { return symbol(sym.separador_luces, yytext()); }
   {Asignador}                    { return symbol(sym.asignar_entrega, yytext()); }
-
-  /* comments */
-  {Comment}                      { /* ignore */ }
-  
-  /* whitespace */
-  {WhiteSpace}                   { /* ignore */ }
 
   {Numero}                       { return symbol(sym.l_int_noel, yytext()); }
   {FloatLiteral}                 { return symbol(sym.l_float_nicolas, yytext()); }
