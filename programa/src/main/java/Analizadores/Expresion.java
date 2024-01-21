@@ -10,7 +10,8 @@ package Analizadores;
  */
 
 enum ExpType{
-    STRING, INT, FLOAT, BOOL, CHAR, CHARLIST, INTLIST, ERROR
+    STRING, INT, FLOAT, BOOL, CHAR, CHARLIST, INTLIST, ERROR;
+
 }
 
 public class Expresion {
