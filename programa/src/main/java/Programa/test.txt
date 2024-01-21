@@ -2,7 +2,7 @@ int function main() {
     local int a <=2|
     local int b|
     local int c <= 5|
-    local boolean x|
+    local boolean x <= true|
     local int ac <= a + x|
     return a|
 }

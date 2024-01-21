@@ -62,7 +62,7 @@ public class Expresion {
                 return ExpType.FLOAT;
             case "string":
                 return ExpType.STRING;
-            case "bool":
+            case "boolean":
                 return ExpType.BOOL;
             case "char":
                 return ExpType.CHAR;
