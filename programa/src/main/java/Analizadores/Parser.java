@@ -561,19 +561,19 @@ public class Parser extends java_cup.runtime.lr_parser {
     }
 
   /** Scan to get the next Symbol. */
-//  public java_cup.runtime.Symbol scan()
-//    throws java.lang.Exception
-//    {
-// return lex.next_token(); 
-//    }
-//
-//
-//    Lexer lex;
-//
-//    public Parser(Lexer lex) {
-//        this.lex=lex;
-//        this.symbolFactory = new DefaultSymbolFactory();
-//    }
+  public java_cup.runtime.Symbol scan()
+    throws java.lang.Exception
+    {
+ return lex.next_token(); 
+    }
+
+
+    Lexer lex;
+
+    public Parser(Lexer lex) {
+        this.lex=lex;
+        this.symbolFactory = new DefaultSymbolFactory();
+    }
     
     @Override
     public void syntax_error(Symbol token) {
@@ -622,11 +622,11 @@ public void cargarTiposOperaciones() {
 
 public ExpType validarExp(ExpType tipo1, ExpType tipo2, ArrayList<ExpType> tipos, String operador) {
     if(tipo1 != tipo2) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " los tipos de la expresion " + tipo1.toString() + " y " + tipo2.toString() + " no coinciden con el operador " + operador);
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " los tipos de la expresion " + tipo1.toString() + " y " + tipo2.toString() + " no coinciden con el operador " + operador);
         return ExpType.ERROR;
     }
     if(!tipos.contains(tipo1)) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " los tipos de la expresion " + tipo1.toString() + " y " + tipo2.toString() + " no coinciden con el operador " + operador);
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " los tipos de la expresion " + tipo1.toString() + " y " + tipo2.toString() + " no coinciden con el operador " + operador);
         return ExpType.ERROR;
     }
     return tipo1;
@@ -634,7 +634,7 @@ public ExpType validarExp(ExpType tipo1, ExpType tipo2, ArrayList<ExpType> tipos
 
 public ExpType validarExpU(ExpType tipo, String operador) {
     if(!tipos_u.contains(tipo)) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipo.toString() + " no coincide con el operador " + operador);
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipo.toString() + " no coincide con el operador " + operador);
         return ExpType.ERROR;
     }
     return tipo;
@@ -702,7 +702,7 @@ public ExpType getTipoVar(String nombre, boolean err){
         }
     }
     if(err) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + nombre + " no ha sido declarada en el alcance actual");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + nombre + " no ha sido declarada en el alcance actual");
     }
     return ExpType.ERROR;
 }
@@ -915,10 +915,10 @@ public ExpType getTipoVar(String nombre, boolean err){
     ExpType tipoVar = getTipoVar(id.toString(), true);
     RESULT = new Expresion("null", ExpType.ERROR);
     if(tipo != ExpType.INT) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipo.toString() + " no es valido");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipo.toString() + " no es valido");
     }
     else if(tipoVar != ExpType.INTLIST && tipoVar != ExpType.CHARLIST) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " no es un arreglo");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " no es un arreglo");
     }
     else {
         RESULT = new Expresion(id.toString() + "[" + a.getValor().toString() + "]", tipoVar);
@@ -941,13 +941,13 @@ public ExpType getTipoVar(String nombre, boolean err){
     ExpType tipo = temp.get(0).getTipo();
 
     if(tipo != ExpType.INT && tipo != ExpType.CHAR) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipo.toString() + " no es valido");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipo.toString() + " no es valido");
         RESULT = new Expresion("null", ExpType.ERROR);
         flag = true;
     }
     for(Expresion exp: temp) {
         if(exp.getTipo() != tipo) {
-//            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + exp.getTipo().toString() + " no coincide con el tipo del arreglo " + tipo.toString());
+            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + exp.getTipo().toString() + " no coincide con el tipo del arreglo " + tipo.toString());
             RESULT = new Expresion("null", ExpType.ERROR);
             flag = true;
             break;  
@@ -1248,7 +1248,7 @@ public ExpType getTipoVar(String nombre, boolean err){
         RESULT = new Expresion("++" + id.toString(), res);
     }
     else {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " no se puede aumentar");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " no se puede aumentar");
         RESULT = new Expresion("null", ExpType.ERROR);
     }
 
@@ -1271,7 +1271,7 @@ public ExpType getTipoVar(String nombre, boolean err){
         RESULT = new Expresion("--" + id.toString(), res);
     }
     else {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " no se puede disminuir");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " no se puede disminuir");
         RESULT = new Expresion("null", ExpType.ERROR);
     }
     
@@ -1512,7 +1512,7 @@ public ExpType getTipoVar(String nombre, boolean err){
 		Object id = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
     if(getTipoVar(id.toString(), false) != ExpType.ERROR) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " ya ha sido declarada");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " ya ha sido declarada");
     }
     
     else {
@@ -1539,12 +1539,12 @@ public ExpType getTipoVar(String nombre, boolean err){
 		Object exp = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
     if(getTipoVar(id.toString(), false) != ExpType.ERROR) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " ya ha sido declarada");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " ya ha sido declarada");
     }
     else {
         Expresion a = (Expresion)exp;
         if(a.getTipo() != Expresion.ExpType(type.toString())) {
-//            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + a.getTipo().toString() + " no coincide con el tipo de la variable " + type.toString());
+            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + a.getTipo().toString() + " no coincide con el tipo de la variable " + type.toString());
         }
         else {
             SymbolObject symbol = new SymbolObject("local", type.toString(), id.toString());
@@ -1570,7 +1570,7 @@ public ExpType getTipoVar(String nombre, boolean err){
     Expresion a = (Expresion)exp;
     ExpType tipo = getTipoVar(id.toString(), true);
     if(tipo != a.getTipo()) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + a.getTipo().toString() + " no coincide con el tipo de la variable " + tipo.toString());
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + a.getTipo().toString() + " no coincide con el tipo de la variable " + tipo.toString());
     }
     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("asig_galleta",9, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1592,12 +1592,12 @@ public ExpType getTipoVar(String nombre, boolean err){
 		Object lit = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		
     if(type.toString() != "int" && type.toString() != "char") {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la variable " + type.toString() + " no es valido");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la variable " + type.toString() + " no es valido");
     }
     else {
         int size = Integer.parseInt(lit.toString());
         if(size <= 0) {
-//            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tamano del arreglo " + size + " no es valido");
+            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tamano del arreglo " + size + " no es valido");
         }
         else {
             SymbolObject symbol = new SymbolObject("local", type.toString() + "[]", id.toString());
@@ -1627,27 +1627,27 @@ public ExpType getTipoVar(String nombre, boolean err){
 		Object arr = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
     if(type.toString() != "int" && type.toString() != "char") {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la variable " + type.toString() + " no es valido");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la variable " + type.toString() + " no es valido");
     }
     else {
         Expresion a = (Expresion)arr;
         if(a.getTipo() == ExpType.ERROR){
-//            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + a.getTipo().toString() + " no coincide con el tipo del arreglo " + type.toString());
+            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + a.getTipo().toString() + " no coincide con el tipo del arreglo " + type.toString());
         }
         else{
             ExpType tipo = Expresion.ExpType(type.toString() + "[]");
             if(a.getTipo() != tipo) {
-//                System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + arr.getTipo().toString() + " no coincide con el tipo del arreglo " + tipo.toString());
+                System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + a.getTipo().toString() + " no coincide con el tipo del arreglo " + tipo.toString());
             }
             else {
                 var temp = (ArrayList<Expresion>)a.getValor();
                 int size = Integer.parseInt(lit.toString());
                 if(size != temp.size()) {
-//                    System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tamano del arreglo " + size + " no coincide con el tamano del arreglo" + temp.size());
+                    System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tamano del arreglo " + size + " no coincide con el tamano del arreglo" + temp.size());
                 }
                 else {
                     if(getTipoVar(id.toString(), false) != ExpType.ERROR) {
-//                        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " ya ha sido declarada");
+                        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la variable " + id.toString() + " ya ha sido declarada");
                     }
                     else {
                         SymbolObject symbol = new SymbolObject("local", type.toString() + "[]", id.toString());
@@ -1678,11 +1678,11 @@ public ExpType getTipoVar(String nombre, boolean err){
     ExpType tipoA = a.getTipo();
     ExpType tipoB = b.getTipo();
     if(tipoA != tipoB){
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipoB.toString() + " no coincide con el tipo del arreglo " + tipoA.toString());
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipoB.toString() + " no coincide con el tipo del arreglo " + tipoA.toString());
     }
     else {
         if(tipoA == ExpType.ERROR) {
-//            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion no es valido");
+            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion no es valido");
         }
     }
 
@@ -1941,7 +1941,7 @@ public ExpType getTipoVar(String nombre, boolean err){
     Expresion a = (Expresion)exp;
     ExpType tipo = a.getTipo();
     if(tipo != ExpType.BOOL) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipo.toString() + " no es valido porque no es booleano");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipo.toString() + " no es valido porque no es booleano");
     }
     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("for_fabrica",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1959,7 +1959,7 @@ public ExpType getTipoVar(String nombre, boolean err){
     Expresion a = (Expresion)exp;
     ExpType tipo = a.getTipo();
     if(tipo != ExpType.BOOL) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipo.toString() + " no es valido porque no es booleano");
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + tipo.toString() + " no es valido porque no es booleano");
     }
     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("do_regalos",19, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -2142,7 +2142,7 @@ public ExpType getTipoVar(String nombre, boolean err){
     ExpType tipo = ((Expresion)exp).getTipo();
     ExpType tipoFuncion = funcionActual().getRetorno();
     if(tipo != tipoFuncion) {
-//        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + "el tipo de retorno de la funcion " + tipoFuncion.toString() + " no coincide con el tipo de la expresion" + tipo.toString());
+        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + "el tipo de retorno de la funcion " + tipoFuncion.toString() + " no coincide con el tipo de la expresion" + tipo.toString());
     }
     else{
         funcionActual().setRetornaAlgo(true);

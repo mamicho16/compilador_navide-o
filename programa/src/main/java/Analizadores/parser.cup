@@ -663,7 +663,7 @@ local_arbol tipos_noel:type identificador_persona:id cuadrado_abre_empaque l_int
         else{
             ExpType tipo = Expresion.ExpType(type.toString() + "[]");
             if(a.getTipo() != tipo) {
-                System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + arr.getTipo().toString() + " no coincide con el tipo del arreglo " + tipo.toString());
+                System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de la expresion " + a.getTipo().toString() + " no coincide con el tipo del arreglo " + tipo.toString());
             }
             else {
                 var temp = (ArrayList<Expresion>)a.getValor();

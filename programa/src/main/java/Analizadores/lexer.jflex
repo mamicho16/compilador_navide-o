@@ -20,6 +20,14 @@ import java_cup.runtime.*;
     private Symbol symbol(int type, Object value) {
         return new Symbol(type, yyline, yycolumn, value);
     }
+
+    public int getLine(){
+        return yyline;
+    }
+
+    public int getColumn(){
+        return yycolumn;
+    }
 %}
     
 // Expresiones Regulares

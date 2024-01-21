@@ -664,14 +664,6 @@ public class Lexer implements java_cup.runtime.Scanner {
         return new Symbol(type, yyline, yycolumn, value);
     }
 
-    public int getLine(){
-        return yyline;
-    }
-
-    public int getColumn(){
-        return yycolumn;
-    }
-
 
   /**
    * Creates a new scanner
