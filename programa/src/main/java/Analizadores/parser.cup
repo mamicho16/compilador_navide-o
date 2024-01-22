@@ -101,6 +101,10 @@ public Funcion buscarFuncion(String nombre) {
     return null;
 } 
 
+public void addFuncion(Funcion func) {
+    funciones.add(func);
+}
+
 public Funcion funcionActual() {
     return funciones.get(funciones.size() - 1);
 }
@@ -714,6 +718,8 @@ argumento_rompope:arg separador_luces expresion_regalo:exp {:
 
 parametro_pascua ::= tipos_noel:type identificador_persona:id {: SymbolObject symbol = new SymbolObject("param", type.toString(), id.toString());
                                                                  addSymbol(symbol);
+                                                                 // Meter el parametro a la funcion actual
+                                                                 funcionActual().addTipo
                                                                :};
 parametros_pascua ::= parametro_pascua | parametros_pascua separador_luces parametro_pascua; // 4, 5, 1
 
