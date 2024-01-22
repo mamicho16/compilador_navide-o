@@ -725,7 +725,7 @@ parametros_pascua ::= parametro_pascua | parametros_pascua separador_luces param
 
 funcion_bolsanavidena ::= funcion_gnomo | funcion_bolsanavidena funcion_gnomo; // funciones del programa
 
-funcion_gnomo ::= definir_funcion_leche bloque_muneco | defininir_funcion_galletas bloque_muneco; // funciones con bloque de codigo
+funcion_gnomo ::= definir_funcion_leche bloque_muneco; // funciones con bloque de codigo
 
 // Aqui se definen los hash segun la funcion
 // Arreglar dividir la estructura de la funcion de los parametros
@@ -744,23 +744,19 @@ definir_funcion_leche_aux ::= tipos_noel:type function_regalo main_fiestas:main 
 
 
 
-                          tipos_noel:type function_regalo main_fiestas:main {:  addHash("main");
+                            tipos_noel:type function_regalo main_fiestas:main {:  addHash("main");
                                                                                 SymbolObject symbol = new SymbolObject("function", type.toString(), "main");
                                                                                 addSymbol(symbol);
-                                                                                                                                                :}; // int func main (3, 4) 
-
-
-
-definir_funcion_galletas ::= defininir_funcion_galletas_aux redondo_abre_cuento redondo_cierra_cuento | defininir_funcion_galletas_aux redondo_abre_cuento parametros_pascua redondo_cierra_cuento
-
-defininir_funcion_galletas_aux ::= tipos_noel:type function_regalo identificador_persona:id {:  addHash(id.toString());
+                                                                                                                                                :}| // int func main (3, 4) 
+                            tipos_noel:type function_regalo identificador_persona:id {:  addHash(id.toString());
 `                                                                                               SymbolObject symbol = new SymbolObject("function", type.toString(), id.toString());
                                                                                                 addSymbol(symbol);
                                                                                                                                          :} | // int func myfunc ()
-                               tipos_noel:type function_regalo identificador_persona:id     {:  addHash(id.toString());
+                            tipos_noel:type function_regalo identificador_persona:id     {:  addHash(id.toString());
                                                                                                 SymbolObject symbol = new SymbolObject("function", type.toString(), id.toString());
                                                                                                 addSymbol(symbol);
                                                                                                                                                            :}; // int func myfunc (3, 4)
+
 
 // Llamada de funciones (main, otras, read, print)
 llamada_funciones_nieve ::= main_fiestas redondo_abre_cuento redondo_cierra_cuento {:
