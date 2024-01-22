@@ -832,7 +832,7 @@ if (func == null) {
                             } else {
                                 // Revisar que los argumentos esten bien
                                 ExpType[] tiposArgus = func.getParametros();
-                                ArrayList<Expresion> exprArgus = argus;
+                                ArrayList<Expresion> exprArgus = (ArrayList<Expresion>)argus;
 
                                 if (tiposArgus.length != exprArgus.size()) {
                                     System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la funcion main tiene un numero incorrecto de argumentos.");
@@ -873,7 +873,7 @@ if (func == null) {
                             } else {
                                 // Revisar que los argumentos esten bien
                                 ExpType[] tiposArgus = func.getParametros();
-                                ArrayList<Expresion> exprArgus = argus;
+                                ArrayList<Expresion> exprArgus = (ArrayList<Expresion>)argus;
 
                                 if (tiposArgus.length != exprArgus.size()) {
                                     System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la funcion " + id.toString() + " tiene un numero incorrecto de argumentos.");

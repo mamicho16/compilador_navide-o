@@ -4,9 +4,9 @@
  */
 package Programa;
 //
-//import Analizadores.Lexer;
-//import Analizadores.Parser;
-//import Analizadores.sym;
+import Analizadores.Lexer;
+import Analizadores.Parser;
+import Analizadores.sym;
 import java.io.BufferedReader;
     import java.io.FileReader;
     import java.io.IOException;
@@ -30,42 +30,42 @@ import java.io.BufferedReader;
             // Variable para almacenar los resultados de los tokens
             ArrayList<String[]> results = new ArrayList<>();
 
-//            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-//                Lexer lex = new Lexer(reader);
-//
-//                int i = 0;
-//                Symbol token;
-//
-//                while (true) {
-//                    try {
-//                        token = lex.next_token();
-//                        // Si el token simbolo es diferente a 0 (aun no ha terminado de leer) y si es invalido
-//                        if (token.sym != 0 && token.sym == sym.err_malcriado) {
-//                            System.err.println("En la linea " + token.left + ", columna " + token.right + " el token: " + token.value + " es invalido.");
-//                        // Si no ha terminado de leer crea las filas para la tabla
-//                        } else if (token.sym != 0) {
-//                            String[] row = new String[5];
-//                            row[0] = sym.terminalNames[token.sym];
-//                            row[1] = token.value.toString();
-//                            row[2] = Integer.toString(token.sym);
-//                            row[3] = Integer.toString(token.left);
-//                            row[4] = Integer.toString(token.right);
-//                            results.add(row);
-//                        // Se termina de leer y muestra en consola los lexemas encontrados
-//                        } else {
-//                            System.out.println("Cantidad de lexemas encontrados: " +i);
-//                            break;
-//                        }
-//                    } catch (Exception e) {
-//                        System.err.println(e.getMessage());
-//                        break;
-//                    }
-//                    i++;
-//                }
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+                Lexer lex = new Lexer(reader);
+
+                int i = 0;
+                Symbol token;
+
+                while (true) {
+                    try {
+                        token = lex.next_token();
+                        // Si el token simbolo es diferente a 0 (aun no ha terminado de leer) y si es invalido
+                        if (token.sym != 0 && token.sym == sym.err_malcriado) {
+                            System.err.println("En la linea " + token.left + ", columna " + token.right + " el token: " + token.value + " es invalido.");
+                        // Si no ha terminado de leer crea las filas para la tabla
+                        } else if (token.sym != 0) {
+                            String[] row = new String[5];
+                            row[0] = sym.terminalNames[token.sym];
+                            row[1] = token.value.toString();
+                            row[2] = Integer.toString(token.sym);
+                            row[3] = Integer.toString(token.left);
+                            row[4] = Integer.toString(token.right);
+                            results.add(row);
+                        // Se termina de leer y muestra en consola los lexemas encontrados
+                        } else {
+                            System.out.println("Cantidad de lexemas encontrados: " +i);
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                        break;
+                    }
+                    i++;
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             // Instancia la clase para crear la tabla HTML 
             HTMLTable tableGenerator = new HTMLTable();
@@ -77,16 +77,16 @@ import java.io.BufferedReader;
 
 
             System.out.println("Leyendo archivo de sintaxis: " + fileName);
-//            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-//                Lexer lexer = new Lexer(reader);
-//                Parser parsing = new Parser(lexer);
-//                parsing.parse();
-//                // Si no hay error, fue exitoso el analisis
-//                System.out.println("Archivo analizado y creado exitosamente.");
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                System.out.println("Error al analizar el archivo. No se puede generar por gramatica.");
-//            }
+            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+                Lexer lexer = new Lexer(reader);
+                Parser parsing = new Parser(lexer);
+                parsing.parse();
+                // Si no hay error, fue exitoso el analisis
+                System.out.println("Archivo analizado y creado exitosamente.");
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Error al analizar el archivo. No se puede generar por gramatica.");
+            }
     }
    
 }
