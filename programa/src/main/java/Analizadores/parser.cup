@@ -247,7 +247,7 @@ non terminal logicas_regalomanual;
 non terminal asig_galleta;
 
 // Parametros y funciones
-non terminal argumento_rompope, parametro_pascua, parametros_pascua, funcion_bolsanavidena, funcion_gnomo, definir_funcion_leche, definir_funcion_leche_aux, defininir_funcion_galletas, defininir_funcion_galletas_aux;
+non terminal argumento_rompope, parametro_pascua, parametros_pascua, funcion_bolsanavidena, funcion_gnomo, definir_funcion_leche, definir_funcion_leche_aux, definir_funcion_galletas, definir_funcion_galletas_aux;
 
 // Llamada de funciones
 non terminal llamada_funciones_nieve;
