@@ -14,14 +14,6 @@ float function func1(char x22,char x22){@semantico borrar parametro
 	local boolean mibool <= true|
 
 	return -5.6|@cambio en retorno genera semantico
-
-int function main() {
-    local int a <=2|
-    local int b|
-    local int c <= 5|
-    local boolean x <= true|
-    local int ac <= a + x|
-    return a|
 }
 
 float function miFunc(int x, float z){	
