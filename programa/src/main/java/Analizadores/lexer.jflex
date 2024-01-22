@@ -62,8 +62,8 @@ OR = \#
 NOT = \!
 
 
-LineTerminator = \r|\n|\r\n
-InputCharacter = [^\r\n]
+LineTerminator = [\n\r\u2028\u2029]
+InputCharacter = [^{LineTerminator}]
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
 

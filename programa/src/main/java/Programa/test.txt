@@ -1,15 +1,15 @@
  /_ esto es un comentario inicial _/
 
 float function func1(char x22,char x22){@semantico borrar parametro
-	local char x22 <= "!"| /_semantico x22_/
-	local char miChar<="!"|
+	local char x22 <= '!'| /_semantico x22_/
+	local char miChar<='!'|
         @ Restringir el largo en semantico, para que char largo = 1
-	local char miChar2<="!!"| @sintactico
+	local char miChar2<='!!'| @sintactico
 	local string str1<="Hola $%&/#$&) mundo"|
 	local float fl1|
 	local float fl1<=56.6| @semantico fl1
 	local int in1<= false|
-	local char arr[2] <= {"c","d"}| @sintatico lit
+	local char arr[2] <= {'c','d'}| @sintatico lit
 	@arr[2] <= "c"|
 	local boolean mibool <= true|
 
