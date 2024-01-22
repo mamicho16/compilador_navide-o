@@ -17,22 +17,11 @@ enum ExpType{
 public class Expresion {
     private Object valor;
     private ExpType tipo;
-    //private String dir;
 
     public Expresion(Object valor, ExpType tipo) {
         this.valor = valor;
         this.tipo = tipo;
     }
-
-    // public Expresion(Object valor, ExpType tipo, String dir) {
-    //     this.valor = valor;
-    //     this.tipo = tipo;
-    //     this.dir = dir;
-    // }
-
-    // public String getDir() {
-    //     return dir;
-    // }
 
     public Object getValor() {
         return valor;
@@ -41,10 +30,6 @@ public class Expresion {
     public ExpType getTipo() {
         return tipo;
     }
-
-    // public void setDir(String dir) {
-    //     this.dir = dir;
-    // }
 
     public void setValor(Object valor) {
         this.valor = valor;
