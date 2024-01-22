@@ -83,6 +83,13 @@ public void printSymbolTable() {
 }
 
 
+public boolean validType(String type) {
+    if (type.equals("char") || type.equals("int") || type.equals("string") || type.equals("float") || type.equals("bool")) {
+        return true;
+    }
+    return false;
+}
+
 public void addHash(String newHash) {
     hash = newHash;
     tablasSimbolos.put(newHash, new ArrayList<SymbolObject>());
@@ -719,7 +726,7 @@ argumento_rompope:arg separador_luces expresion_regalo:exp {:
 parametro_pascua ::= tipos_noel:type identificador_persona:id {: SymbolObject symbol = new SymbolObject("param", type.toString(), id.toString());
                                                                  addSymbol(symbol);
                                                                  // Meter el parametro a la funcion actual
-                                                                 funcionActual().addTipo
+                                                                 funcionActual().anadirParam(Expresion.ExpType(type));
                                                                :};
 parametros_pascua ::= parametro_pascua | parametros_pascua separador_luces parametro_pascua; // 4, 5, 1
 
@@ -730,30 +737,71 @@ funcion_gnomo ::= definir_funcion_leche bloque_muneco; // funciones con bloque d
 // Aqui se definen los hash segun la funcion
 // Arreglar dividir la estructura de la funcion de los parametros
 
-definir_funcion_leche ::= tipos_noel:type function_regalo main_fiestas:main redondo_abre_cuento redondo_cierra_cuento {:  addHash("main");
-                                                                                    SymbolObject symbol = new SymbolObject("function", type.toString(), "main");
-                                                                                    addSymbol(symbol);
-                                                                                                                             :}| // int func main ()
-                                                                                                                             
+definir_funcion_leche ::= tipos_noel:type function_regalo main_fiestas:main redondo_abre_cuento redondo_cierra_cuento {:
+
+                                                                                    if (!validType(type.toString())) {
+                                                                                        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de retorno no es valido.");
+                                                                                    } else {      
+                                                                                        if (buscarFuncion("main") != null) {
+                                                                                            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la funcion main ya existe.");
+                                                                                        } else {
+                                                                                            addHash("main");
+                                                                                            RESULT = "main";
+                                                                                            SymbolObject symbol = new SymbolObject("function", type.toString(), "main");
+                                                                                            addSymbol(symbol);
+                                                                                            addFuncion(new Funcion("main", Expresion.ExpType(type.toString()), false, new ExpType[] {}));
+                                                                                        }
+                                                                                    }                                                                        
+                                     :}| // int func main ()
 
 
+                            tipos_noel:type function_regalo main_fiestas:main redondo_abre_cuento parametro_pascua redondo_cierra_cuento {:  
 
-
-
-
-
-                            tipos_noel:type function_regalo main_fiestas:main redondo_abre_cuento parametro_pascua redondo_cierra_cuento {:  addHash("main");
-                                                                                SymbolObject symbol = new SymbolObject("function", type.toString(), "main");
-                                                                                addSymbol(symbol);
+                                                                                    if (!validType(type.toString())) {
+                                                                                        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de retorno no es valido.");
+                                                                                    } else {      
+                                                                                        if (buscarFuncion("main") != null) {
+                                                                                            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la funcion main ya existe.");
+                                                                                        } else {
+                                                                                            addHash("main");
+                                                                                            RESULT = "main";
+                                                                                            SymbolObject symbol = new SymbolObject("function", type.toString(), "main");
+                                                                                            addSymbol(symbol);
+                                                                                            addFuncion(new Funcion("main", Expresion.ExpType(type.toString()), false, new ExpType[] {}));
+                                                                                        }
+                                                                                    }  
+                    
                                                                                                                                                 :}| // int func main (3, 4) 
-                            tipos_noel:type function_regalo identificador_persona:id redondo_abre_cuento redondo_cierra_cuento {:  addHash(id.toString());
-`                                                                                               SymbolObject symbol = new SymbolObject("function", type.toString(), id.toString());
-                                                                                                addSymbol(symbol);
+                            tipos_noel:type function_regalo identificador_persona:id redondo_abre_cuento redondo_cierra_cuento {:  
+                                                                                    if (!validType(type.toString())) {
+                                                                                        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de retorno no es valido.");
+                                                                                    } else {      
+                                                                                        if (buscarFuncion(id.toString()) != null) {
+                                                                                            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la funcion " + id.toString() + " ya existe.");
+                                                                                        } else {
+                                                                                            addHash(id.toString());
+                                                                                            RESULT = id.toString();
+                                                                                            SymbolObject symbol = new SymbolObject("function", type.toString(), id.toString());
+                                                                                            addSymbol(symbol);
+                                                                                            addFuncion(new Funcion(id.toString(), Expresion.ExpType(type.toString()), false, new ExpType[] {}));
+                                                                                        }
+                                                                                    }  
                                                                                                                                          :} | // int func myfunc ()
-                            tipos_noel:type function_regalo identificador_persona:id redondo_abre_cuento parametros_pascua redondo_cierra_cuento {:  addHash(id.toString());
-                                                                                                SymbolObject symbol = new SymbolObject("function", type.toString(), id.toString());
-                                                                                                addSymbol(symbol);
-                                                                                                                                                           :}; // int func myfunc (3, 4)
+                            tipos_noel:type function_regalo identificador_persona:id redondo_abre_cuento parametros_pascua redondo_cierra_cuento {:  
+                            
+                                                                                    if (!validType(type.toString())) {
+                                                                                        System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de retorno no es valido.");
+                                                                                    } else {      
+                                                                                        if (buscarFuncion(id.toString()) != null) {
+                                                                                            System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " la funcion " + id.toString() + " ya existe.");
+                                                                                        } else {
+                                                                                            addHash(id.toString());
+                                                                                            RESULT = id.toString();
+                                                                                            SymbolObject symbol = new SymbolObject("function", type.toString(), id.toString());
+                                                                                            addSymbol(symbol);
+                                                                                            addFuncion(new Funcion(id.toString(), Expresion.ExpType(type.toString()), false, new ExpType[] {}));
+                                                                                        }
+                                                                                    }                                                                                                                                 :}; // int func myfunc (3, 4)
 
 
 // Llamada de funciones (main, otras, read, print)
@@ -841,7 +889,7 @@ if (func == null) {
                             :} | // funcion con parametros
                             print_narra redondo_abre_cuento argumento_rompope:argus redondo_cierra_cuento {:
                             ArrayList<Expresion> exprArgus = argus;
-                            for (Expression expr : exprArgus) {
+                            for (Expresion expr : exprArgus) {
                                 if (expr.getTipo() != ExpType.INT || expr.getTipo() != ExpType.FLOAT || expr.getTipo() != ExpType.STRING || expr.getTipo() != ExpType.BOOL || expr.getTipo() != ExpType.CHAR) {
                                     System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + "el tipo de dato " + expr.getTipo().toString() + " no es valido para un print.");
                                 }
