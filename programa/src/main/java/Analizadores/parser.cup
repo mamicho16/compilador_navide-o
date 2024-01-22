@@ -254,7 +254,7 @@ non terminal logicas_regalomanual;
 non terminal asig_galleta;
 
 // Parametros y funciones
-non terminal argumento_rompope, parametro_pascua, parametros_pascua, funcion_bolsanavidena, funcion_gnomo, definir_funcion_leche;
+non terminal argumento_rompope, parametro_pascua, parametros_pascua, funcion_bolsanavidena, funcion_gnomo, definir_funcion_leche, definir_funcion_galletas;
 
 // Llamada de funciones
 non terminal llamada_funciones_nieve;
@@ -732,8 +732,7 @@ parametros_pascua ::= parametro_pascua | parametros_pascua separador_luces param
 
 funcion_bolsanavidena ::= funcion_gnomo | funcion_bolsanavidena funcion_gnomo; // funciones del programa
 
-funcion_gnomo ::= definir_funcion_leche bloque_muneco; // funciones con bloque de codigo
-
+funcion_gnomo ::= definir_funcion_leche bloque_muneco | definir_funcion_galletas bloque_muneco; // funciones con bloque de codigo
 // Aqui se definen los hash segun la funcion
 // Arreglar dividir la estructura de la funcion de los parametros
 
@@ -771,8 +770,9 @@ definir_funcion_leche ::= tipos_noel:type function_regalo main_fiestas:main redo
                                                                                         }
                                                                                     }  
                     
-                                                                                                                                                :}| // int func main (3, 4) 
-                            tipos_noel:type function_regalo identificador_persona:id redondo_abre_cuento redondo_cierra_cuento {:  
+                                                                                                                                                :}; // int func main (3, 4) 
+
+definir_funcion_galletas ::=                             tipos_noel:type function_regalo identificador_persona:id redondo_abre_cuento redondo_cierra_cuento {:  
                                                                                     if (!validType(type.toString())) {
                                                                                         System.out.println("Error semantico en la linea " + lex.getLine() + " columna " + lex.getColumn() + " el tipo de retorno no es valido.");
                                                                                     } else {      
