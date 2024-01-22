@@ -4,7 +4,7 @@ float function func1(char x22,char x22){@semantico borrar parametro
 	local char x22 <= '!'| /_semantico x22_/
 	local char miChar<='!'|
         @ Restringir el largo en semantico, para que char largo = 1
-	local char miChar2<='!!'| @sintactico
+	local char miChar2<='!'| @sintactico
 	local string str1<="Hola $%&/#$&) mundo"|
 	local float fl1|
 	local float fl1<=56.6| @semantico fl1
@@ -12,9 +12,6 @@ float function func1(char x22,char x22){@semantico borrar parametro
 	local char arr[2] <= {'c','d'}| @sintatico lit
 	@arr[2] <= "c"|
 	local boolean mibool <= true|
-
-	local int in1 <= --fl1 ~ -14/++in1+7- 15 **  arr in1 * func1 (hola, true, "hola mundo", 4.5, "a") | @semantico fl1, in1
-	mibool <= (3.7 * fl1 + (-45.6~76)) < 56 ^ true # mibool # !mibool  | @semantico literal 76
 
 	return -5.6|@cambio en retorno genera semantico
 
