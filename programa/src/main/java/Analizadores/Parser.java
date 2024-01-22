@@ -1734,8 +1734,8 @@ public ExpType getTipoVar(String nombre, boolean err){
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object id = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		 SymbolObject symbol = new SymbolObject("param", type.toString(), id.toString());
-                                                                 addSymbol(symbol);
+//		 SymbolObject symbol = new SymbolObject("param", type.toString(), "identificador");
+//                                                                 addSymbol(symbol);
                                                                
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("parametro_pascua",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1823,6 +1823,9 @@ public ExpType getTipoVar(String nombre, boolean err){
 		int mainleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
 		int mainright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
 		Object main = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		int paramleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int paramright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object param = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		 addHash("main");
                                                                                                                                                  SymbolObject symbol = new SymbolObject("function", type.toString(), "main");
                                                                                                                                                  addSymbol(symbol);
@@ -1859,6 +1862,9 @@ public ExpType getTipoVar(String nombre, boolean err){
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
 		Object id = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		int paramleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int paramright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object param = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		 addHash(id.toString());
                                                                                                                                                              SymbolObject symbol = new SymbolObject("function", type.toString(), id.toString());
                                                                                                                                                              addSymbol(symbol);
